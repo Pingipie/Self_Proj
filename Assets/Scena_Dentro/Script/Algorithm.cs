@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class Algorithm : MonoBehaviour
 {
-    private GameObject[] Blue;
-    private GameObject[] Red;
-    private GameObject[] Yellow;
-    private GameObject[] Green;
+    private GameObject[] Blue = new GameObject[13];
+    private GameObject[] Red = new GameObject[13];
+    private GameObject[] Yellow = new GameObject[13];
+    private GameObject[] Green = new GameObject[13];
 
-    private int totInteraction;
-    private int blueInteraction;
-    private int redInteraction;
+    public int totInteraction;
+    public int blueInteraction;
+    public int redInteraction;
     private int yellowInteraction;
     private int greenInteraction;
+
+    private string[] chronology;
+
+    private int crr; //per la concorrenza
 
     // Start is called before the first frame update
     void Start()
@@ -29,40 +33,59 @@ public class Algorithm : MonoBehaviour
         Yellow = sortArray(Yellow);
         Green = sortArray(Green);
 
-        Debug.Log(Blue[0].name);
+        //Debug.Log(Blue[0].name);
 
         totInteraction = 0;
         blueInteraction = 0;
         redInteraction = 0;
         yellowInteraction = 0;
         greenInteraction = 0;
+
+        chronology = new string[6];
+
+        crr = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (crr == 1)
+        {
+            Implementation();
+        }
+    }
+
+    private void Implementation()
+    {
+        crr = 0;
+
         //prima interazione
         if (totInteraction == 0)
         {
-            Debug.Log(Blue[totInteraction].GetComponent<CheckInteraction>().collision);
-            if (Blue[totInteraction].GetComponent<CheckInteraction>().collision)
+            //Debug.Log(Blue[1].name);
+            if (Blue[0].GetComponent<CheckInteraction>().collision)
             {
-                StartCoroutine(disappear(Blue[totInteraction]));
+                
+                StartCoroutine(disappear(Blue[0]));
 
                 //va inserita l'apertura del media
 
                 StartCoroutine(appear(Blue[1]));
                 StartCoroutine(appear(Blue[2]));
 
-                totInteraction ++;
-                blueInteraction ++;
+                totInteraction++;
+                blueInteraction++;
 
-                StartCoroutine(disappear(Green[totInteraction]));
+                chronology[0] = "blue";
+
+                StartCoroutine(disappear(Green[0]));
+                greenInteraction = -1;
             }
 
-            if (Red[totInteraction].GetComponent<CheckInteraction>().collision)
+            else if (Red[0].GetComponent<CheckInteraction>().collision)
             {
-                StartCoroutine(disappear(Red[totInteraction]));
+                Destroy(Red[0].GetComponent<CheckInteraction>());
+                StartCoroutine(disappear(Red[0]));
 
                 //va inserita l'apertura del media
 
@@ -72,12 +95,16 @@ public class Algorithm : MonoBehaviour
                 totInteraction++;
                 redInteraction++;
 
-                StartCoroutine(disappear(Green[totInteraction]));
+                chronology[0] = "red";
+
+                StartCoroutine(disappear(Green[0]));
+                greenInteraction = -1;
             }
 
-            if (Yellow[totInteraction].GetComponent<CheckInteraction>().collision)
+            else if (Yellow[0].GetComponent<CheckInteraction>().collision)
             {
-                StartCoroutine(disappear(Yellow[totInteraction]));
+                Destroy(Yellow[0].GetComponent<CheckInteraction>());
+                StartCoroutine(disappear(Yellow[0]));
 
                 //va inserita l'apertura del media
 
@@ -87,12 +114,16 @@ public class Algorithm : MonoBehaviour
                 totInteraction++;
                 yellowInteraction++;
 
-                StartCoroutine(disappear(Green[totInteraction]));
+                chronology[0] = "yellow";
+
+                StartCoroutine(disappear(Green[0]));
+                greenInteraction = -1;
             }
 
-            if (Green[totInteraction].GetComponent<CheckInteraction>().collision)
+            else if (Green[0].GetComponent<CheckInteraction>().collision)
             {
-                StartCoroutine(disappear(Green[totInteraction]));
+                Destroy(Green[0].GetComponent<CheckInteraction>());
+                StartCoroutine(disappear(Green[0]));
 
                 //va inserita l'apertura del media
 
@@ -102,15 +133,1705 @@ public class Algorithm : MonoBehaviour
                 totInteraction++;
                 greenInteraction++;
 
-                StartCoroutine(disappear(Yellow[totInteraction])); //sparisce ovunque il verde tranne qui il giallo
+                chronology[0] = "green";
+
+                StartCoroutine(disappear(Yellow[0]));
+                yellowInteraction = -1;
             }
+
+
+
         } //fine prima interazione
-        
+
+        //inizio seconda interazione
+        else if (totInteraction == 1)
+        {
+            foreach (GameObject blueIcon in Blue)
+            {
+                if (blueInteraction == 1 && blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                {
+                    StartCoroutine(disappear(blueIcon));
+
+                    StartCoroutine(appear(Blue[3]));
+                    StartCoroutine(appear(Blue[4]));
+
+                    totInteraction++;
+                    blueInteraction++;
+
+                    chronology[1] = "blue";
+                }
+            }
+            /*if(blueInteraction == 1 && Blue[1].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Blue[1]));
+
+                StartCoroutine(appear(Blue[3]));
+                StartCoroutine(appear(Blue[4]));
+
+                StartCoroutine(addInteraction());
+                blueInteraction++;
+
+                chronology[1] = "blue";
+            }
+
+            else if(blueInteraction == 1 && Blue[2].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Blue[2]));
+
+                StartCoroutine(appear(Blue[3]));
+                StartCoroutine(appear(Blue[4]));
+
+                StartCoroutine(addInteraction());
+                blueInteraction++;
+
+                chronology[1] = "blue";
+            }*/
+
+            if (blueInteraction == 0 && Blue[0].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Blue[0]));
+
+                StartCoroutine(appear(Blue[1]));
+                StartCoroutine(appear(Blue[2]));
+
+                totInteraction++;
+                blueInteraction++;
+
+                chronology[1] = "blue";
+            }
+
+            else if (redInteraction == 1 && Red[1].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Red[1]));
+
+                StartCoroutine(appear(Red[3]));
+                StartCoroutine(appear(Red[4]));
+
+                totInteraction++;
+                redInteraction++;
+
+                chronology[1] = "red";
+            }
+
+            else if (redInteraction == 1 && Red[2].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Red[2]));
+
+                StartCoroutine(appear(Red[3]));
+                StartCoroutine(appear(Red[4]));
+
+                totInteraction++;
+                redInteraction++;
+
+                chronology[1] = "red";
+            }
+
+            else if (redInteraction == 0 && Red[0].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Red[0]));
+
+                StartCoroutine(appear(Red[1]));
+                StartCoroutine(appear(Red[2]));
+
+                totInteraction++;
+                redInteraction++;
+
+                chronology[1] = "red";
+            }
+
+            else if (yellowInteraction == 1 && Yellow[1].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Yellow[1]));
+
+                StartCoroutine(appear(Yellow[3]));
+                StartCoroutine(appear(Yellow[4]));
+
+                totInteraction++;
+                yellowInteraction++;
+
+                chronology[1] = "yellow";
+            }
+
+            else if (yellowInteraction == 1 && Yellow[2].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Yellow[2]));
+
+                StartCoroutine(appear(Yellow[3]));
+                StartCoroutine(appear(Yellow[4]));
+
+                totInteraction++;
+                yellowInteraction++;
+
+                chronology[1] = "yellow";
+            }
+
+            else if (yellowInteraction == 0 && Yellow[0].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Yellow[0]));
+
+                StartCoroutine(appear(Yellow[1]));
+                StartCoroutine(appear(Yellow[2]));
+
+                totInteraction++;
+                yellowInteraction++;
+
+                chronology[1] = "yellow";
+            }
+
+            else if (greenInteraction == 1 && Green[1].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Green[1]));
+
+                StartCoroutine(appear(Green[3]));
+                StartCoroutine(appear(Green[4]));
+
+                totInteraction++;
+                greenInteraction++;
+
+                chronology[1] = "green";
+            }
+
+            else if (greenInteraction == 1 && Green[2].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Green[2]));
+
+                StartCoroutine(appear(Green[3]));
+                StartCoroutine(appear(Green[4]));
+
+                totInteraction++;
+                greenInteraction++;
+
+                chronology[1] = "green";
+            }
+
+            else if (greenInteraction == 0 && Green[0].GetComponent<CheckInteraction>().collision)
+            {
+                StartCoroutine(disappear(Green[0]));
+
+                StartCoroutine(appear(Green[1]));
+                StartCoroutine(appear(Green[2]));
+
+                totInteraction++;
+                greenInteraction++;
+
+                chronology[1] = "green";
+            }
+        } //fine seconda interazione
+
+        //inizio terza interazione
+        else if (totInteraction == 2)
+        {
+            if (blueInteraction == 2)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[5]));
+                        StartCoroutine(appear(Blue[6]));
+
+                        StartCoroutine(disappear(Yellow[0]));
+                        yellowInteraction = -1;
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[2] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 1)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[3]));
+                        StartCoroutine(appear(Blue[4]));
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[2] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 0)
+            {
+                if (Blue[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Blue[0]));
+
+                    StartCoroutine(appear(Blue[1]));
+                    StartCoroutine(appear(Blue[2]));
+
+                    totInteraction++;
+                    blueInteraction++;
+
+                    chronology[2] = "blue";
+                }
+            }
+
+            if (redInteraction == 2)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[5]));
+                        StartCoroutine(appear(Red[6]));
+
+                        StartCoroutine(disappear(Yellow[0]));
+                        yellowInteraction = -1;
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[2] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 1)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[3]));
+                        StartCoroutine(appear(Red[4]));
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[2] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 0)
+            {
+                if (Red[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Red[0]));
+
+                    StartCoroutine(appear(Red[1]));
+                    StartCoroutine(appear(Red[2]));
+
+                    totInteraction++;
+                    redInteraction++;
+
+                    chronology[2] = "red";
+                }
+            }
+
+            if (yellowInteraction == 2)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[5]));
+                        StartCoroutine(appear(Yellow[6]));
+
+                        StartCoroutine(disappear(Red[0]));
+                        redInteraction = -1;
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[2] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 1)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[3]));
+                        StartCoroutine(appear(Yellow[4]));
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[2] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 0)
+            {
+                if (Yellow[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Yellow[0]));
+
+                    StartCoroutine(appear(Yellow[1]));
+                    StartCoroutine(appear(Yellow[2]));
+
+                    totInteraction++;
+                    yellowInteraction++;
+
+                    chronology[2] = "yellow";
+                }
+            }
+
+            if (greenInteraction == 2)
+            {
+                foreach (GameObject greenIcon in Yellow)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[5]));
+                        StartCoroutine(appear(Green[6]));
+
+                        StartCoroutine(disappear(Red[0]));
+                        redInteraction = -1;
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[2] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 1)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[3]));
+                        StartCoroutine(appear(Green[4]));
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[2] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 0)
+            {
+                if (Green[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Green[0]));
+
+                    StartCoroutine(appear(Green[1]));
+                    StartCoroutine(appear(Green[2]));
+
+                    totInteraction++;
+                    greenInteraction++;
+
+                    chronology[2] = "green";
+                }
+            }
+        }//fine terza interazione
+
+        //inizio quarta interazione
+        else if (totInteraction == 3)
+        {
+            if (blueInteraction == 3)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[7]));
+                        StartCoroutine(appear(Blue[8]));
+                        StartCoroutine(appear(Blue[9]));
+
+                        StartCoroutine(disappear(Red[0]));
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[3] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 2)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[5]));
+                        StartCoroutine(appear(Blue[6]));
+                        StartCoroutine(appear(Blue[7]));
+
+                        if (redInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Red[0]));
+                            redInteraction = -1;
+                        }
+                        else if (yellowInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Yellow[0]));
+                            yellowInteraction = -1;
+                        }
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[3] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 1)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[3]));
+                        StartCoroutine(appear(Blue[4]));
+                        StartCoroutine(appear(Blue[5]));
+
+                        //situazione in cui abbiamo 3 rossi, 3 verdi/gialli, 3 blu
+                        //togliamo quello scelto più indietro
+                        if (blueInteraction == 1 && redInteraction == 1 && (yellowInteraction == 1 || greenInteraction == 1))
+                        {
+                            if (chronology[0] != "blue")
+                            {
+                                if (chronology[0] == "red")
+                                {
+                                    foreach (GameObject redIcon in Red)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "yellow")
+                                {
+                                    foreach (GameObject yellowIcon in Yellow)
+                                    {
+                                        StartCoroutine(disappear(yellowIcon));
+                                        yellowInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "green")
+                                {
+                                    foreach (GameObject greenIcon in Green)
+                                    {
+                                        StartCoroutine(disappear(greenIcon));
+                                        greenInteraction = -1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (chronology[1] == "red")
+                                {
+                                    foreach (GameObject redIcon in Red)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "yellow")
+                                {
+                                    foreach (GameObject yellowIcon in Yellow)
+                                    {
+                                        StartCoroutine(disappear(yellowIcon));
+                                        yellowInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "green")
+                                {
+                                    foreach (GameObject greenIcon in Green)
+                                    {
+                                        StartCoroutine(disappear(greenIcon));
+                                        greenInteraction = -1;
+                                    }
+                                }
+                            }
+                        }
+
+                        //altra situazione in cui ci sono 5 rossi/verdi/gialli 3 blu e 1 rosso/giallo
+                        else
+                        {
+                            if (redInteraction == 0)
+                            {
+                                StartCoroutine(disappear(Red[0]));
+                                redInteraction = -1;
+                            }
+                            else
+                            {
+                                StartCoroutine(disappear(Yellow[0]));
+                                yellowInteraction = -1;
+                            }
+                        }
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[3] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 0)
+            {
+                if (Blue[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Blue[0]));
+
+                    StartCoroutine(appear(Blue[1]));
+                    StartCoroutine(appear(Blue[2]));
+                    StartCoroutine(appear(Blue[3]));
+
+                    if (redInteraction == 1)
+                    {
+                        foreach (GameObject redIcon in Red)
+                        {
+                            StartCoroutine(disappear(redIcon));
+                            redInteraction = -1;
+                        }
+                    }
+                    else if (yellowInteraction == 1)
+                    {
+                        foreach (GameObject yellowIcon in Red)
+                        {
+                            StartCoroutine(disappear(yellowIcon));
+                            yellowInteraction = -1;
+                        }
+                    }
+                    else if (greenInteraction == 1)
+                    {
+                        foreach (GameObject greenIcon in Green)
+                        {
+                            StartCoroutine(disappear(greenIcon));
+                            yellowInteraction = -1;
+                        }
+                    }
+
+                    totInteraction++;
+                    blueInteraction++;
+
+                    chronology[3] = "blue";
+                }
+            }
+
+            if (redInteraction == 3)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[7]));
+                        StartCoroutine(appear(Red[8]));
+                        StartCoroutine(appear(Red[9]));
+
+                        StartCoroutine(disappear(Blue[0]));
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[3] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 2)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[5]));
+                        StartCoroutine(appear(Red[6]));
+                        StartCoroutine(appear(Red[7]));
+
+                        if (blueInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Blue[0]));
+                            blueInteraction = -1;
+                        }
+                        else if (yellowInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Yellow[0]));
+                            yellowInteraction = -1;
+                        }
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[3] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 1)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[3]));
+                        StartCoroutine(appear(Red[4]));
+                        StartCoroutine(appear(Red[5]));
+
+                        //situazione in cui abbiamo 3 rossi, 3 verdi/gialli, 3 blu
+                        //togliamo quello scelto più indietro
+                        if (blueInteraction == 1 && redInteraction == 1 && (yellowInteraction == 1 || greenInteraction == 1))
+                        {
+                            if (chronology[0] != "red")
+                            {
+                                if (chronology[0] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "yellow")
+                                {
+                                    foreach (GameObject yellowIcon in Yellow)
+                                    {
+                                        StartCoroutine(disappear(yellowIcon));
+                                        yellowInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "green")
+                                {
+                                    foreach (GameObject greenIcon in Green)
+                                    {
+                                        StartCoroutine(disappear(greenIcon));
+                                        greenInteraction = -1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (chronology[1] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        blueInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "yellow")
+                                {
+                                    foreach (GameObject yellowIcon in Yellow)
+                                    {
+                                        StartCoroutine(disappear(yellowIcon));
+                                        yellowInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "green")
+                                {
+                                    foreach (GameObject greenIcon in Green)
+                                    {
+                                        StartCoroutine(disappear(greenIcon));
+                                        greenInteraction = -1;
+                                    }
+                                }
+                            }
+                        }
+
+                        //altra situazione in cui ci sono 5 blu/verdi/gialli 3 rossi e 1 blu/giallo
+                        else
+                        {
+                            if (blueInteraction == 0)
+                            {
+                                StartCoroutine(disappear(Blue[0]));
+                                blueInteraction = -1;
+                            }
+                            else
+                            {
+                                StartCoroutine(disappear(Yellow[0]));
+                                yellowInteraction = -1;
+                            }
+                        }
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[3] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 0)
+            {
+                if (Red[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Red[0]));
+
+                    StartCoroutine(appear(Red[1]));
+                    StartCoroutine(appear(Red[2]));
+                    StartCoroutine(appear(Red[3]));
+
+
+                    if (blueInteraction == 1)
+                    {
+                        foreach (GameObject blueIcon in Blue)
+                        {
+                            StartCoroutine(disappear(blueIcon));
+                            blueInteraction = -1;
+                        }
+                    }
+                    else if (yellowInteraction == 1)
+                    {
+                        foreach (GameObject yellowIcon in Red)
+                        {
+                            StartCoroutine(disappear(yellowIcon));
+                            yellowInteraction = -1;
+                        }
+                    }
+                    else if (greenInteraction == 1)
+                    {
+                        foreach (GameObject greenIcon in Green)
+                        {
+                            StartCoroutine(disappear(greenIcon));
+                            yellowInteraction = -1;
+                        }
+                    }
+
+                    totInteraction++;
+                    redInteraction++;
+
+                    chronology[3] = "red";
+                }
+            }
+
+            if (yellowInteraction == 3)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[7]));
+                        StartCoroutine(appear(Yellow[8]));
+                        StartCoroutine(appear(Yellow[9]));
+
+                        StartCoroutine(disappear(Blue[0]));
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[3] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 2)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[5]));
+                        StartCoroutine(appear(Yellow[6]));
+                        StartCoroutine(appear(Yellow[7]));
+
+                        if (blueInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Blue[0]));
+                            blueInteraction = -1;
+                        }
+                        else if (redInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Red[0]));
+                            redInteraction = -1;
+                        }
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[3] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 1)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[3]));
+                        StartCoroutine(appear(Yellow[4]));
+                        StartCoroutine(appear(Yellow[5]));
+
+                        //situazione in cui abbiamo 3 rossi, 3 gialli, 3 blu
+                        //togliamo quello scelto più indietro
+                        if (blueInteraction == 1 && redInteraction == 1 && yellowInteraction == 1)
+                        {
+                            if (chronology[0] != "yellow")
+                            {
+                                if (chronology[0] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        blueInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "red")
+                                {
+                                    foreach (GameObject redIcon in Red)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (chronology[1] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        blueInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "red")
+                                {
+                                    foreach (GameObject redIcon in Yellow)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                            }
+                        }
+
+                        //altra situazione in cui ci sono 5 blu/rossi 3 gialli e 1 blu/rosso
+                        else
+                        {
+                            if (blueInteraction == 0)
+                            {
+                                StartCoroutine(disappear(Blue[0]));
+                                blueInteraction = -1;
+                            }
+                            else
+                            {
+                                StartCoroutine(disappear(Red[0]));
+                                redInteraction = -1;
+                            }
+                        }
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[3] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 0)
+            {
+                if (Yellow[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Yellow[0]));
+
+                    StartCoroutine(appear(Yellow[1]));
+                    StartCoroutine(appear(Yellow[2]));
+                    StartCoroutine(appear(Yellow[3]));
+
+                    if (blueInteraction == 1)
+                    {
+                        foreach (GameObject blueIcon in Blue)
+                        {
+                            StartCoroutine(disappear(blueIcon));
+                            blueInteraction = -1;
+                        }
+                    }
+                    else if (redInteraction == 1)
+                    {
+                        foreach (GameObject redIcon in Red)
+                        {
+                            StartCoroutine(disappear(redIcon));
+                            redInteraction = -1;
+                        }
+                    }
+
+                    totInteraction++;
+                    yellowInteraction++;
+
+                    chronology[3] = "yellow";
+                }
+            }
+
+            if (greenInteraction == 3)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[7]));
+                        StartCoroutine(appear(Green[8]));
+                        StartCoroutine(appear(Green[9]));
+
+                        StartCoroutine(disappear(Blue[0]));
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[3] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 2)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[5]));
+                        StartCoroutine(appear(Green[6]));
+                        StartCoroutine(appear(Green[7]));
+
+                        if (blueInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Blue[0]));
+                            blueInteraction = -1;
+                        }
+                        else if (redInteraction == 0)
+                        {
+                            StartCoroutine(disappear(Red[0]));
+                            redInteraction = -1;
+                        }
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[3] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 1)
+            {
+                foreach (GameObject greenIcon in Yellow)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Yellow[3]));
+                        StartCoroutine(appear(Yellow[4]));
+                        StartCoroutine(appear(Yellow[5]));
+
+                        //situazione in cui abbiamo 3 rossi, 3 gialli, 3 blu
+                        //togliamo quello scelto più indietro
+                        if (blueInteraction == 1 && redInteraction == 1 && yellowInteraction == 1)
+                        {
+                            if (chronology[0] != "yellow")
+                            {
+                                if (chronology[0] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        blueInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[0] == "red")
+                                {
+                                    foreach (GameObject redIcon in Red)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (chronology[1] == "blue")
+                                {
+                                    foreach (GameObject blueIcon in Blue)
+                                    {
+                                        StartCoroutine(disappear(blueIcon));
+                                        blueInteraction = -1;
+                                    }
+                                }
+                                else if (chronology[1] == "red")
+                                {
+                                    foreach (GameObject redIcon in Red)
+                                    {
+                                        StartCoroutine(disappear(redIcon));
+                                        redInteraction = -1;
+                                    }
+                                }
+                            }
+                        }
+
+                        //altra situazione in cui ci sono 5 blu/rossi 3 verdi e 1 blu/rosso
+                        else
+                        {
+                            if (blueInteraction == 0)
+                            {
+                                StartCoroutine(disappear(Blue[0]));
+                                blueInteraction = -1;
+                            }
+                            else
+                            {
+                                StartCoroutine(disappear(Red[0]));
+                                redInteraction = -1;
+                            }
+                        }
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[3] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 0)
+            {
+                if (Green[0].GetComponent<CheckInteraction>().collision)
+                {
+                    StartCoroutine(disappear(Green[0]));
+
+                    StartCoroutine(appear(Green[1]));
+                    StartCoroutine(appear(Green[2]));
+                    StartCoroutine(appear(Green[3]));
+
+                    if (blueInteraction == 1)
+                    {
+                        foreach (GameObject blueIcon in Blue)
+                        {
+                            StartCoroutine(disappear(blueIcon));
+                            blueInteraction = -1;
+                        }
+                    }
+                    else if (redInteraction == 1)
+                    {
+                        foreach (GameObject redIcon in Red)
+                        {
+                            StartCoroutine(disappear(redIcon));
+                            redInteraction = -1;
+                        }
+                    }
+
+                    totInteraction++;
+                    greenInteraction++;
+
+                    chronology[3] = "green";
+                }
+            }
+        }//fine quarta interazione
+
+        //inizio quinta interazione
+        else if (totInteraction == 4)
+        {
+            if (blueInteraction == 4)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[10]));
+                        StartCoroutine(appear(Blue[11]));
+                        StartCoroutine(appear(Blue[12]));
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[4] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 3)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[8]));
+                        StartCoroutine(appear(Blue[9]));
+                        StartCoroutine(appear(Blue[10]));
+
+                        //se è stato scelto due volte di fila blu che è nettamente superiore, togliamo l'altro colore rimanente
+                        if (chronology[3] == "blue")
+                        {
+                            if (redInteraction == 1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                            else if (yellowInteraction == 1)
+                            {
+                                foreach (GameObject yellowIcon in Yellow)
+                                {
+                                    StartCoroutine(disappear(yellowIcon));
+                                    yellowInteraction = -1;
+                                }
+                            }
+                            else
+                            {
+                                foreach (GameObject greenIcon in Green)
+                                {
+                                    StartCoroutine(disappear(greenIcon));
+                                    greenInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[4] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 2)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[6]));
+                        StartCoroutine(appear(Blue[7]));
+                        StartCoroutine(appear(Blue[8]));
+
+                        if (chronology[3] == "blue")
+                        {
+                            if (redInteraction != -1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                            else if (yellowInteraction != -1)
+                            {
+                                foreach (GameObject yellowIcon in Yellow)
+                                {
+                                    StartCoroutine(disappear(yellowIcon));
+                                    yellowInteraction = -1;
+                                }
+                            }
+                            else if (greenInteraction != -1)
+                            {
+                                foreach (GameObject greenIcon in Green)
+                                {
+                                    StartCoroutine(disappear(greenIcon));
+                                    greenInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[4] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            else if (blueInteraction == 1)
+            {
+                foreach (GameObject blueIcon in Blue)
+                {
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(blueIcon));
+
+                        StartCoroutine(appear(Blue[4]));
+                        StartCoroutine(appear(Blue[5]));
+                        StartCoroutine(appear(Blue[6]));
+
+                        totInteraction++;
+                        blueInteraction++;
+
+                        chronology[4] = "blue";
+                        break;
+                    }
+                }
+            }
+
+            if (redInteraction == 4)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[10]));
+                        StartCoroutine(appear(Red[11]));
+                        StartCoroutine(appear(Red[12]));
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[4] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 3)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[8]));
+                        StartCoroutine(appear(Red[9]));
+                        StartCoroutine(appear(Red[10]));
+
+                        //se è stato scelto due volte di fila rosso che è nettamente superiore, togliamo l'altro colore rimanente
+                        if (chronology[3] == "red")
+                        {
+                            if (blueInteraction == 1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (yellowInteraction == 1)
+                            {
+                                foreach (GameObject yellowIcon in Yellow)
+                                {
+                                    StartCoroutine(disappear(yellowIcon));
+                                    yellowInteraction = -1;
+                                }
+                            }
+                            else
+                            {
+                                foreach (GameObject greenIcon in Green)
+                                {
+                                    StartCoroutine(disappear(greenIcon));
+                                    greenInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[4] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 2)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[6]));
+                        StartCoroutine(appear(Red[7]));
+                        StartCoroutine(appear(Red[8]));
+
+                        if (chronology[3] == "red")
+                        {
+                            if (blueInteraction != -1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (yellowInteraction != -1)
+                            {
+                                foreach (GameObject yellowIcon in Yellow)
+                                {
+                                    StartCoroutine(disappear(yellowIcon));
+                                    yellowInteraction = -1;
+                                }
+                            }
+                            else if (greenInteraction != -1)
+                            {
+                                foreach (GameObject greenIcon in Green)
+                                {
+                                    StartCoroutine(disappear(greenIcon));
+                                    greenInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[4] = "red";
+                        break;
+                    }
+                }
+            }
+
+            else if (redInteraction == 1)
+            {
+                foreach (GameObject redIcon in Red)
+                {
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(redIcon));
+
+                        StartCoroutine(appear(Red[4]));
+                        StartCoroutine(appear(Red[5]));
+                        StartCoroutine(appear(Red[6]));
+
+                        totInteraction++;
+                        redInteraction++;
+
+                        chronology[4] = "red";
+                        break;
+                    }
+                }
+            }
+
+            if (yellowInteraction == 4)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[10]));
+                        StartCoroutine(appear(Yellow[11]));
+                        StartCoroutine(appear(Yellow[12]));
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[4] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 3)
+            {
+                foreach (GameObject yellowIcon in Red)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[8]));
+                        StartCoroutine(appear(Yellow[9]));
+                        StartCoroutine(appear(Yellow[10]));
+
+                        //se è stato scelto due volte di fila giallo che è nettamente superiore, togliamo l'altro colore rimanente
+                        if (chronology[3] == "yellow")
+                        {
+                            if (blueInteraction == 1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (redInteraction == 1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[4] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 2)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[6]));
+                        StartCoroutine(appear(Yellow[7]));
+                        StartCoroutine(appear(Yellow[8]));
+
+                        if (chronology[3] == "yellow")
+                        {
+                            if (blueInteraction != -1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (redInteraction != -1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[4] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            else if (yellowInteraction == 1)
+            {
+                foreach (GameObject yellowIcon in Yellow)
+                {
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(yellowIcon));
+
+                        StartCoroutine(appear(Yellow[4]));
+                        StartCoroutine(appear(Yellow[5]));
+                        StartCoroutine(appear(Yellow[6]));
+
+                        totInteraction++;
+                        yellowInteraction++;
+
+                        chronology[4] = "yellow";
+                        break;
+                    }
+                }
+            }
+
+            if (greenInteraction == 4)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[10]));
+                        StartCoroutine(appear(Green[11]));
+                        StartCoroutine(appear(Green[12]));
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[4] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 3)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[8]));
+                        StartCoroutine(appear(Green[9]));
+                        StartCoroutine(appear(Green[10]));
+
+                        //se è stato scelto due volte di fila giallo che è nettamente superiore, togliamo l'altro colore rimanente
+                        if (chronology[3] == "green")
+                        {
+                            if (blueInteraction == 1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (redInteraction == 1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[4] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 2)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[6]));
+                        StartCoroutine(appear(Green[7]));
+                        StartCoroutine(appear(Green[8]));
+
+                        if (chronology[3] == "green")
+                        {
+                            if (blueInteraction != -1)
+                            {
+                                foreach (GameObject blueIcon in Blue)
+                                {
+                                    StartCoroutine(disappear(blueIcon));
+                                    blueInteraction = -1;
+                                }
+                            }
+                            else if (redInteraction != -1)
+                            {
+                                foreach (GameObject redIcon in Red)
+                                {
+                                    StartCoroutine(disappear(redIcon));
+                                    redInteraction = -1;
+                                }
+                            }
+                        }
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[4] = "green";
+                        break;
+                    }
+                }
+            }
+
+            else if (greenInteraction == 1)
+            {
+                foreach (GameObject greenIcon in Green)
+                {
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    {
+                        StartCoroutine(disappear(greenIcon));
+
+                        StartCoroutine(appear(Green[4]));
+                        StartCoroutine(appear(Green[5]));
+                        StartCoroutine(appear(Green[6]));
+
+                        totInteraction++;
+                        greenInteraction++;
+
+                        chronology[4] = "green";
+                        break;
+                    }
+                }
+            }
+        }//fine quinta interazione
+
+        crr = 1;
     }
 
     //Coroutine per far sparire l'icona
     IEnumerator disappear(GameObject icon)
     {
+        icon.GetComponent<SphereCollider>().enabled = false;
+        icon.GetComponent<SphereCollider>().isTrigger = false;
+
         yield return new WaitForSeconds(1); //per feedback su controller
 
         //va inserita l'animazione della sparizione, si potrebbe usare un bool associato all'animazione poi per far partire
@@ -118,9 +1839,9 @@ public class Algorithm : MonoBehaviour
         //comunque vanno tolti Render e Collider per diminuire il peso grafico
 
         icon.GetComponent<MeshRenderer>().enabled = false;
-        icon.GetComponent<MeshCollider>().enabled = false;
     }
 
+    //Coroutine per far apparire l'icona
     IEnumerator appear(GameObject icon)
     {
         yield return new WaitForSeconds(1);
@@ -129,12 +1850,13 @@ public class Algorithm : MonoBehaviour
         //l'apparizione di Collider e Render
 
         icon.GetComponent<MeshRenderer>().enabled = true;
-        icon.GetComponent<MeshCollider>().enabled = true;
+        icon.GetComponent<SphereCollider>().enabled = true;
     }
 
+    //per ordinare gli array di icone
     private GameObject[] sortArray(GameObject[] icons)
     {
-        GameObject[] sorted = new GameObject[16];
+        GameObject[] sorted = new GameObject[13];
 
         foreach(GameObject icon in icons)
         {
