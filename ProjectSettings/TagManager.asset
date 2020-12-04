@@ -9,6 +9,9 @@ TagManager:
   - Yellow
   - Red
   - Hand
+  - WebStar
+  - Movie
+  - Information
   layers:
   - Default
   - TransparentFX

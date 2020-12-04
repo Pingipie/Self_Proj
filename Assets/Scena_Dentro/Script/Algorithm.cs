@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class Algorithm : MonoBehaviour
 {
-    private GameObject[] Blue = new GameObject[13];
-    private GameObject[] Red = new GameObject[13];
-    private GameObject[] Yellow = new GameObject[13];
-    private GameObject[] Green = new GameObject[13];
+    private GameObject[] Blue; //InformationIcon
+    private GameObject[] Red; //MovieIcon
+    private GameObject[] Yellow; //WebStarIcon
+    private GameObject[] Green; //WebStarIcon
+
+    private GameObject[] WebStarMedia;
+    private GameObject[] MovieMedia;
+    private GameObject[] InformationMedia;
 
     public int totInteraction;
     public int blueInteraction;
     public int redInteraction;
-    private int yellowInteraction;
-    private int greenInteraction;
+    public int yellowInteraction;
+    public int greenInteraction;
 
     private string[] chronology;
 
@@ -28,10 +33,18 @@ public class Algorithm : MonoBehaviour
         Yellow = GameObject.FindGameObjectsWithTag("Yellow");
         Green = GameObject.FindGameObjectsWithTag("Green");
 
-        Blue = sortArray(Blue);
-        Red = sortArray(Red);
-        Yellow = sortArray(Yellow);
-        Green = sortArray(Green);
+        Blue = sortArray(Blue, Blue.Length);
+        Red = sortArray(Red, Red.Length);
+        Yellow = sortArray(Yellow, Yellow.Length);
+        Green = sortArray(Green, Green.Length);
+
+        WebStarMedia = GameObject.FindGameObjectsWithTag("WebStar");
+        MovieMedia = GameObject.FindGameObjectsWithTag("Movie");
+        InformationMedia = GameObject.FindGameObjectsWithTag("Information");
+
+        WebStarMedia = sortArray(WebStarMedia, WebStarMedia.Length);
+        MovieMedia = sortArray(MovieMedia, MovieMedia.Length);
+        InformationMedia = sortArray(InformationMedia, InformationMedia.Length);
 
         //Debug.Log(Blue[0].name);
 
@@ -65,6 +78,7 @@ public class Algorithm : MonoBehaviour
             //Debug.Log(Blue[1].name);
             if (Blue[0].GetComponent<CheckInteraction>().collision)
             {
+                //StartCoroutine(AssignMedia(Blue[0], InformationMedia[0]));
                 
                 StartCoroutine(disappear(Blue[0]));
 
@@ -1854,9 +1868,9 @@ public class Algorithm : MonoBehaviour
     }
 
     //per ordinare gli array di icone
-    private GameObject[] sortArray(GameObject[] icons)
+    private GameObject[] sortArray(GameObject[] icons, int i)
     {
-        GameObject[] sorted = new GameObject[13];
+        GameObject[] sorted = new GameObject[i];
 
         foreach(GameObject icon in icons)
         {
@@ -1867,5 +1881,28 @@ public class Algorithm : MonoBehaviour
         }
 
         return sorted;
+    }
+
+    IEnumerator AssignMedia(GameObject icon, GameObject media)
+    {
+        yield return new WaitForSeconds(1);
+
+        media.transform.position.Set(icon.transform.position.x, icon.transform.position.y, icon.transform.position.z);
+
+        //per video
+        if (media.TryGetComponent(out MeshRenderer renderVideo) && media.TryGetComponent(out VideoPlayer player))
+        {
+            renderVideo.enabled = true;
+            player.Play();
+        }
+
+        //per immagini
+        else if(media.TryGetComponent(out MeshRenderer renderImage))
+            renderImage.enabled = true;
+        
+        //per audio
+        else if(media.TryGetComponent(out AudioSource audioSource))
+            audioSource.Play();
+       
     }
 }
