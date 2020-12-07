@@ -78,8 +78,7 @@ public class Algorithm : MonoBehaviour
             //Debug.Log(Blue[1].name);
             if (Blue[0].GetComponent<CheckInteraction>().collision)
             {
-                //StartCoroutine(AssignMedia(Blue[0], InformationMedia[0]));
-                
+                StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));               
                 StartCoroutine(disappear(Blue[0]));
 
                 //va inserita l'apertura del media
@@ -98,7 +97,7 @@ public class Algorithm : MonoBehaviour
 
             else if (Red[0].GetComponent<CheckInteraction>().collision)
             {
-                Destroy(Red[0].GetComponent<CheckInteraction>());
+                StartCoroutine(AssignMedia(Red[0], MovieMedia[0]));
                 StartCoroutine(disappear(Red[0]));
 
                 //va inserita l'apertura del media
@@ -117,7 +116,7 @@ public class Algorithm : MonoBehaviour
 
             else if (Yellow[0].GetComponent<CheckInteraction>().collision)
             {
-                Destroy(Yellow[0].GetComponent<CheckInteraction>());
+                StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[0]));
 
                 //va inserita l'apertura del media
@@ -136,7 +135,7 @@ public class Algorithm : MonoBehaviour
 
             else if (Green[0].GetComponent<CheckInteraction>().collision)
             {
-                Destroy(Green[0].GetComponent<CheckInteraction>());
+                StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[0]));
 
                 //va inserita l'apertura del media
@@ -164,6 +163,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (blueInteraction == 1 && blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                 {
+                    StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(blueIcon));
 
                     StartCoroutine(appear(Blue[3]));
@@ -175,34 +175,10 @@ public class Algorithm : MonoBehaviour
                     chronology[1] = "blue";
                 }
             }
-            /*if(blueInteraction == 1 && Blue[1].GetComponent<CheckInteraction>().collision)
-            {
-                StartCoroutine(disappear(Blue[1]));
-
-                StartCoroutine(appear(Blue[3]));
-                StartCoroutine(appear(Blue[4]));
-
-                StartCoroutine(addInteraction());
-                blueInteraction++;
-
-                chronology[1] = "blue";
-            }
-
-            else if(blueInteraction == 1 && Blue[2].GetComponent<CheckInteraction>().collision)
-            {
-                StartCoroutine(disappear(Blue[2]));
-
-                StartCoroutine(appear(Blue[3]));
-                StartCoroutine(appear(Blue[4]));
-
-                StartCoroutine(addInteraction());
-                blueInteraction++;
-
-                chronology[1] = "blue";
-            }*/
 
             if (blueInteraction == 0 && Blue[0].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                 StartCoroutine(disappear(Blue[0]));
 
                 StartCoroutine(appear(Blue[1]));
@@ -216,6 +192,7 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 1 && Red[1].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Red[1], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[1]));
 
                 StartCoroutine(appear(Red[3]));
@@ -229,6 +206,7 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 1 && Red[2].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Red[2], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[2]));
 
                 StartCoroutine(appear(Red[3]));
@@ -242,6 +220,7 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 0 && Red[0].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[0]));
 
                 StartCoroutine(appear(Red[1]));
@@ -255,6 +234,7 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 1 && Yellow[1].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Yellow[1], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[1]));
 
                 StartCoroutine(appear(Yellow[3]));
@@ -268,6 +248,7 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 1 && Yellow[2].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Yellow[2], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[2]));
 
                 StartCoroutine(appear(Yellow[3]));
@@ -281,6 +262,7 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 0 && Yellow[0].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[0]));
 
                 StartCoroutine(appear(Yellow[1]));
@@ -294,6 +276,7 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 1 && Green[1].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Green[1], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[1]));
 
                 StartCoroutine(appear(Green[3]));
@@ -307,6 +290,7 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 1 && Green[2].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Green[2], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[2]));
 
                 StartCoroutine(appear(Green[3]));
@@ -320,6 +304,7 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 0 && Green[0].GetComponent<CheckInteraction>().collision)
             {
+                StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[0]));
 
                 StartCoroutine(appear(Green[1]));
@@ -341,6 +326,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[5]));
@@ -364,6 +350,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[3]));
@@ -382,6 +369,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Blue[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(Blue[0]));
 
                     StartCoroutine(appear(Blue[1]));
@@ -400,6 +388,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[5]));
@@ -423,6 +412,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[3]));
@@ -441,6 +431,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Red[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                     StartCoroutine(disappear(Red[0]));
 
                     StartCoroutine(appear(Red[1]));
@@ -459,6 +450,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[5]));
@@ -482,6 +474,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[3]));
@@ -500,6 +493,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Yellow[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                     StartCoroutine(disappear(Yellow[0]));
 
                     StartCoroutine(appear(Yellow[1]));
@@ -518,6 +512,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[5]));
@@ -541,6 +536,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[3]));
@@ -559,6 +555,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Green[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                     StartCoroutine(disappear(Green[0]));
 
                     StartCoroutine(appear(Green[1]));
@@ -581,6 +578,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[7]));
@@ -604,6 +602,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[5]));
@@ -636,6 +635,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[3]));
@@ -730,6 +730,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Blue[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(Blue[0]));
 
                     StartCoroutine(appear(Blue[1]));
@@ -774,6 +775,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[7]));
@@ -797,6 +799,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[5]));
@@ -829,6 +832,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[3]));
@@ -923,6 +927,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Red[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                     StartCoroutine(disappear(Red[0]));
 
                     StartCoroutine(appear(Red[1]));
@@ -968,6 +973,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[7]));
@@ -991,6 +997,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[5]));
@@ -1023,6 +1030,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[3]));
@@ -1101,6 +1109,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Yellow[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                     StartCoroutine(disappear(Yellow[0]));
 
                     StartCoroutine(appear(Yellow[1]));
@@ -1137,6 +1146,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[7]));
@@ -1160,6 +1170,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[5]));
@@ -1192,6 +1203,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Yellow[3]));
@@ -1270,6 +1282,7 @@ public class Algorithm : MonoBehaviour
             {
                 if (Green[0].GetComponent<CheckInteraction>().collision)
                 {
+                    StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                     StartCoroutine(disappear(Green[0]));
 
                     StartCoroutine(appear(Green[1]));
@@ -1310,6 +1323,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[10]));
@@ -1331,6 +1345,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[8]));
@@ -1381,6 +1396,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[6]));
@@ -1430,6 +1446,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[4]));
@@ -1451,6 +1468,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[10]));
@@ -1472,6 +1490,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[8]));
@@ -1522,6 +1541,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[6]));
@@ -1571,6 +1591,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
                         StartCoroutine(appear(Red[4]));
@@ -1592,6 +1613,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[10]));
@@ -1613,6 +1635,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[8]));
@@ -1655,6 +1678,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[6]));
@@ -1696,6 +1720,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
                         StartCoroutine(appear(Yellow[4]));
@@ -1717,6 +1742,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[10]));
@@ -1738,6 +1764,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[8]));
@@ -1780,6 +1807,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[6]));
@@ -1821,6 +1849,7 @@ public class Algorithm : MonoBehaviour
                 {
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
                     {
+                        StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
                         StartCoroutine(appear(Green[4]));
@@ -1887,7 +1916,7 @@ public class Algorithm : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        media.transform.position.Set(icon.transform.position.x, icon.transform.position.y, icon.transform.position.z);
+        media.transform.position = new Vector3(icon.transform.position.x, icon.transform.position.y, icon.transform.position.z);
 
         //per video
         if (media.TryGetComponent(out MeshRenderer renderVideo) && media.TryGetComponent(out VideoPlayer player))
