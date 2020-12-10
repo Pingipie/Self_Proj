@@ -13,8 +13,9 @@ public class CheckInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Hand"))
+        if (collider.CompareTag("Hand")) { 
             collision = true;
-
+            Debug.Log("collisiondetected");
+                }
     }
 }
