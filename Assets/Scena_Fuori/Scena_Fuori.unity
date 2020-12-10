@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.2257137, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2003,17 +2003,17 @@ MonoBehaviour:
     vrTarget: {fileID: 403172823}
     rigTarget: {fileID: 125883173}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 180, y: 90, z: 90}
   leftHand:
     vrTarget: {fileID: 403172825}
     rigTarget: {fileID: 399474277}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 90, y: -90, z: 0}
+    trackingRotationOffset: {x: 0, y: 90, z: 90}
   rightHand:
     vrTarget: {fileID: 403172824}
     rigTarget: {fileID: 1737012742}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 90, y: 90, z: 0}
+    trackingRotationOffset: {x: 0, y: -90, z: -90}
   headConstraint: {fileID: 125883173}
   headBodyOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1312386423
