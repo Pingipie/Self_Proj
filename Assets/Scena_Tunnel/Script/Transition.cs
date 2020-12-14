@@ -6,21 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class Transition : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(TransitionScene());
+    public int transition;
 
+    void Update()
+    {
+        if (transition == 1)
+        {
+            transition = 0;
+            StartCoroutine(FirstTransitionScene());
+        }
+        else if (transition == 2)
+        {
+            transition = 0;
+            StartCoroutine(SecondTransitionScene());
+        }
     }
 
-    IEnumerator TransitionScene()
+    IEnumerator FirstTransitionScene()
     {
         yield return new WaitForSeconds(5);
         SceneManager.LoadSceneAsync("Scena_Dentro", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
-
     }
 
-
+    IEnumerator SecondTransitionScene()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadSceneAsync("Scena_Fuori", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Scena_Tunnel");
+    }
 
 }

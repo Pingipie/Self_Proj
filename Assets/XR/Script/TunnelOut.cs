@@ -16,9 +16,12 @@ public class TunnelOut : MonoBehaviour
     int yellowInteraction;
     int greenInteraction;
 
+    public int transition;
+
     // Start is called before the first frame update
     void Start()
     {
+        transition = 0;
         counter = 0;
     }
 
@@ -34,8 +37,15 @@ public class TunnelOut : MonoBehaviour
             if (Algorithm.GetComponent<Algorithm>().totInteraction == 5 && counter == 0)
             {
                 counter = 1;
+                transition = 2;
                 StartCoroutine(Tunnel());
             }
+        }
+
+        if(GameObject.Find("ChangeColor") != null && emptyColor == null)
+        {
+            emptyColor = GameObject.Find("ChangeColor");
+            emptyColor.GetComponent<Transition>().transition = transition;
         }
     }
 
@@ -55,7 +65,6 @@ public class TunnelOut : MonoBehaviour
 
         yield return new WaitForSeconds(.3f);
 
-        emptyColor = GameObject.Find("ChangeColor");
         emptyColor.GetComponent<EmptyColor>().blueInteraction = blueInteraction;
         emptyColor.GetComponent<EmptyColor>().redInteraction = redInteraction;
         emptyColor.GetComponent<EmptyColor>().yellowInteraction = yellowInteraction;
