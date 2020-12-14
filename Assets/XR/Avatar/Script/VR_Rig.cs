@@ -34,7 +34,7 @@ public class VR_Rig : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void fixedUpdate()
     {
 		transform.position = headConstraint.position + headBodyOffset;
 		transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
