@@ -58,7 +58,7 @@ public class EvenParticlesAttraction : MonoBehaviour
                     m_rParticlesArray[iParticle].velocity = Vector3.zero;
                     // Interpolate the movement towards the target with a nice quadratic easing					
                     m_rParticlesArray[iParticle].position = new Vector3(Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x * 2, m_fCursor * m_fCursor),
-                        Mathf.Lerp(m_rParticlesArray[iParticle].position.z, m_vParticlesTarget.z * 2, m_fCursor * m_fCursor), 
+                        Mathf.Lerp(m_rParticlesArray[iParticle].position.y, m_vParticlesTarget.y * 2, m_fCursor * m_fCursor), 
                         Mathf.Lerp(m_rParticlesArray[iParticle].position.z, m_vParticlesTarget.z * 2, m_fCursor * m_fCursor));
                     if (Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x * 2, m_fCursor * m_fCursor) > (m_vParticlesTarget.x * 2 - 1))
                     {

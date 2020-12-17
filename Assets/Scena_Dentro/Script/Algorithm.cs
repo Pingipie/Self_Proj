@@ -85,33 +85,17 @@ public class Algorithm : MonoBehaviour
 
                 Blue[1].GetComponent<EvenParticlesAttraction>().enabled = true;
                 Blue[2].GetComponent<OddParticlesAttraction>().enabled = true;
+                StartCoroutine(appear(Blue[1]));
+                StartCoroutine(appear(Blue[2]));
                 //va inserita l'apertura del media
-                while (exit<2)
-                {
-                    if (Blue[1].GetComponent<EvenParticlesAttraction>().creation == true)
-                    {
-                        StartCoroutine(appear(Blue[1]));
-                        exit++;
-                    }
 
-                    if (Blue[2].GetComponent<OddParticlesAttraction>().creation == true)
-                    {
-                        StartCoroutine(appear(Blue[2]));
-                        exit++;
-                    }
+                totInteraction++;
+                blueInteraction++;
 
-                    if(exit == 2)
-                    {
-                        totInteraction++;
-                        blueInteraction++;
+                chronology[0] = "blue";
 
-                        chronology[0] = "blue";
-
-                        StartCoroutine(disappear(Green[0]));
-                        greenInteraction = -1;
-                    }
-
-                }
+                StartCoroutine(disappear(Green[0]));
+                greenInteraction = -1;
             }
 
             else if (Red[0].GetComponent<CheckInteraction>().collision)
@@ -1894,7 +1878,7 @@ public class Algorithm : MonoBehaviour
         icon.GetComponent<SphereCollider>().enabled = false;
         icon.GetComponent<SphereCollider>().isTrigger = false;
 
-        yield return new WaitForSeconds(1); //per feedback su controller
+        yield return new WaitForSeconds(.1f); //per feedback su controller
 
         //va inserita l'animazione della sparizione, si potrebbe usare un bool associato all'animazione poi per far partire
         //la sparizione di Collider e Render
@@ -1906,15 +1890,40 @@ public class Algorithm : MonoBehaviour
     //Coroutine per far apparire l'icona
     IEnumerator appear(GameObject icon)
     {
-        icon.GetComponentInChildren<ParticleSystem>().Play();
+        if (icon.TryGetComponent(out EvenParticlesAttraction even))
+        {
+            while (icon.GetComponent<EvenParticlesAttraction>().creation == false)
+            {
+                yield return new WaitForSeconds(2);
+            }
+            print(icon.GetComponentInChildren<ParticleSystem>());
+            icon.GetComponentInChildren<ParticleSystem>().Play();
 
-        yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3f);
 
-        //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
-        //l'apparizione di Collider e Render
+            //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
+            //l'apparizione di Collider e Render
 
-        icon.GetComponent<MeshRenderer>().enabled = true;
-        icon.GetComponent<SphereCollider>().enabled = true;
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<SphereCollider>().enabled = true;
+        }
+        else if (icon.TryGetComponent(out OddParticlesAttraction odd))
+        {
+            while (icon.GetComponent<OddParticlesAttraction>().creation == false)
+            {
+                yield return new WaitForSeconds(2);
+            }
+            print(icon.GetComponentInChildren<ParticleSystem>());
+            icon.GetComponentInChildren<ParticleSystem>().Play();
+
+            yield return new WaitForSeconds(3f);
+
+            //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
+            //l'apparizione di Collider e Render
+
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<SphereCollider>().enabled = true;
+        }
     }
 
     //per ordinare gli array di icone
