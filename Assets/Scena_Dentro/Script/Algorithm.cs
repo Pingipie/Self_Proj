@@ -24,6 +24,7 @@ public class Algorithm : MonoBehaviour
     private string[] chronology;
 
     private int crr; //per la concorrenza
+    private int exit;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,7 @@ public class Algorithm : MonoBehaviour
     private void Implementation()
     {
         crr = 0;
+        exit = 0;
 
         //prima interazione
         if (totInteraction == 0)
@@ -81,18 +83,35 @@ public class Algorithm : MonoBehaviour
                 StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));               
                 StartCoroutine(disappear(Blue[0]));
 
+                Blue[1].GetComponent<EvenParticlesAttraction>().enabled = true;
+                Blue[2].GetComponent<OddParticlesAttraction>().enabled = true;
                 //va inserita l'apertura del media
+                while (exit<2)
+                {
+                    if (Blue[1].GetComponent<EvenParticlesAttraction>().creation == true)
+                    {
+                        StartCoroutine(appear(Blue[1]));
+                        exit++;
+                    }
 
-                StartCoroutine(appear(Blue[1]));
-                StartCoroutine(appear(Blue[2]));
+                    if (Blue[2].GetComponent<OddParticlesAttraction>().creation == true)
+                    {
+                        StartCoroutine(appear(Blue[2]));
+                        exit++;
+                    }
 
-                totInteraction++;
-                blueInteraction++;
+                    if(exit == 2)
+                    {
+                        totInteraction++;
+                        blueInteraction++;
 
-                chronology[0] = "blue";
+                        chronology[0] = "blue";
 
-                StartCoroutine(disappear(Green[0]));
-                greenInteraction = -1;
+                        StartCoroutine(disappear(Green[0]));
+                        greenInteraction = -1;
+                    }
+
+                }
             }
 
             else if (Red[0].GetComponent<CheckInteraction>().collision)
@@ -1887,7 +1906,9 @@ public class Algorithm : MonoBehaviour
     //Coroutine per far apparire l'icona
     IEnumerator appear(GameObject icon)
     {
-        yield return new WaitForSeconds(1);
+        icon.GetComponentInChildren<ParticleSystem>().Play();
+
+        yield return new WaitForSeconds(3);
 
         //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
         //l'apparizione di Collider e Render
