@@ -1,13 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using UnityEngine;
-using UnityEngine.Video;
+﻿// A lifetime based particle attractor for Unity
+// July 23, 2016
+// CaranElmoth
+// http://www.oldschoolpixels.com/?p=669
 
-public class EvenParticlesAttraction : MonoBehaviour
+
+using UnityEngine;
+
+public class ParticlesAttractor : MonoBehaviour
 {
     // The particle system to operate on
-    public ParticleSystem AffectedParticles;
+    public ParticleSystem AffectedParticles = null;
 
     // Normalized treshold on the particle lifetime
     // 0: affect particles right after they are born
@@ -20,37 +22,28 @@ public class EvenParticlesAttraction : MonoBehaviour
     // Array to store particles info
     private ParticleSystem.Particle[] m_rParticlesArray = null;
     // Is this particle system simulating in world space?
-    private bool m_bWorldPosition = true;
+    private bool m_bWorldPosition = false;
     // Multiplier to normalize movement cursor after treshold is crossed
     private float m_fCursorMultiplier = 1.0f;
 
-    public bool creation;
-    private bool setup;
-
     void Awake()
     {
-        creation = false;
-        setup = false;
         // Let's cache the transform
         m_rTransform = this.transform;
         // Setup particle system info
+        Setup();
     }
 
     // To store how many particles are active on each frame
     private int m_iNumActiveParticles = 0;
     // The attractor target
-    public Vector3 m_vParticlesTarget;
+    private Vector3 m_vParticlesTarget = Vector3.zero;
     // A cursor for the movement interpolation
-    public float m_fCursor = 1f;
-    void Update()
+    private float m_fCursor = 0.0f;
+    void LateUpdate()
     {
-        if (setup == false && AffectedParticles.particleCount == 200)
-        {
-            Setup();
-            setup = true;
-        }
         // Work only if we have something to work on :)
-        if (AffectedParticles != null && setup == true)
+        if (AffectedParticles != null)
         {
             // Let's fetch active particles info
             m_iNumActiveParticles = AffectedParticles.GetParticles(m_rParticlesArray);
@@ -58,31 +51,20 @@ public class EvenParticlesAttraction : MonoBehaviour
             m_vParticlesTarget = m_rTransform.position;
             // If the system is not simulating in world space, let's project the attractor's target in the system's local space
             if (!m_bWorldPosition)
-              m_vParticlesTarget -= AffectedParticles.transform.position;
+                m_vParticlesTarget -= AffectedParticles.transform.position;
 
-            //print(m_vParticlesTarget);
             // For each active particle...
-            for (int iParticle = 0; iParticle < m_iNumActiveParticles; iParticle = iParticle + 2)
+            for (int iParticle = 0; iParticle < m_iNumActiveParticles; iParticle++)
             { // The movement cursor is the opposite of the normalized particle's lifetime m_fCursor = 1.0f - (m_rParticlesArray[iParticle].lifetime / m_rParticlesArray[iParticle].startLifetime); // Are we over the activation treshold? if (m_fCursor >= ActivationTreshold)
                 {
+                    // Let's project the overall cursor in the "over treshold" normalized space
+                    m_fCursor -= ActivationTreshold;
+                    m_fCursor *= m_fCursorMultiplier;
+
                     // Take over the particle system imposed velocity
                     m_rParticlesArray[iParticle].velocity = Vector3.zero;
-
-                    //print(m_vParticlesTarget);
-                    //print(m_rParticlesArray[iParticle].position);
-                    m_rParticlesArray[iParticle].position = Vector3.MoveTowards(m_rParticlesArray[iParticle].position, m_vParticlesTarget, m_fCursor * Time.deltaTime);
-                   
-                    //m_rParticlesArray[iParticle].position = Vector3.Lerp(m_rParticlesArray[iParticle].position, m_vParticlesTarget, m_fCursor * m_fCursor);                    // Interpolate the movement towards the target with a nice quadratic easing					
-                    //m_rParticlesArray[iParticle].position = new Vector3(Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x, m_fCursor * m_fCursor),
-                        //Mathf.Lerp(m_rParticlesArray[iParticle].position.y, m_vParticlesTarget.y, m_fCursor * m_fCursor), 
-                        //Mathf.Lerp(m_rParticlesArray[iParticle].position.z, m_vParticlesTarget.z, m_fCursor * m_fCursor));
-                    if (Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x * 2, m_fCursor * m_fCursor) > (m_vParticlesTarget.x - 1))
-                    {
-                        if (creation == false)
-                            creation = true;
-
-                        m_rParticlesArray[iParticle].remainingLifetime = 0;
-                    }
+                    // Interpolate the movement towards the target with a nice quadratic easing					
+                    m_rParticlesArray[iParticle].position = Vector3.Lerp(m_rParticlesArray[iParticle].position, m_vParticlesTarget, m_fCursor * m_fCursor);
                 }
             }
 
@@ -90,7 +72,6 @@ public class EvenParticlesAttraction : MonoBehaviour
             AffectedParticles.SetParticles(m_rParticlesArray, m_iNumActiveParticles);
         }
     }
-
 
     public void Setup()
     {

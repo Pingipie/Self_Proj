@@ -8024,7 +8024,7 @@ GameObject:
   m_Layer: 0
   m_Name: chaticon_1
   m_TagString: Yellow
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -34748,8 +34748,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071996503}
   m_LocalRotation: {x: -0, y: -0.20805232, z: -0, w: 0.97811776}
-  m_LocalPosition: {x: 3.02, y: 0, z: 0.28}
-  m_LocalScale: {x: 5.3691864, y: 5.369187, z: 5.3691864}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.3691854, y: 5.3691864, z: 5.3691854}
   m_Children: []
   m_Father: {fileID: 1256657245}
   m_RootOrder: 0
@@ -34891,7 +34891,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -36270,7 +36270,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -36854,7 +36854,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -39490,6 +39490,7 @@ GameObject:
   - component: {fileID: 2096930857}
   - component: {fileID: 2096930856}
   - component: {fileID: 2096930855}
+  - component: {fileID: 2096930859}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -39572,6 +39573,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096930859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096930854}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b6491e9c4fcf247a8fc67430c93803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AffectedParticles: {fileID: 2071996506}
+  ActivationTreshold: 1
 --- !u!1 &2105797412
 GameObject:
   m_ObjectHideFlags: 0
