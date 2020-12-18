@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Soffitto
-  m_Shader: {fileID: -6465566751694194690, guid: 8431faaa5b72da54186b2478c3891312,
+  m_Name: Vettorscopio
+  m_Shader: {fileID: -6465566751694194690, guid: e5ef23c7d677fab408286c3c491bfba4,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
