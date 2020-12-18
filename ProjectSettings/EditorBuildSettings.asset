@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/XR/Scena_XR.unity
     guid: 0b8fa03e748f1e34ca2c0ca7adaedc15
+  - enabled: 1
+    path: Assets/Scena_Fuori/Scena_Fuori.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scena_Dentro/Scena_Dentro.unity
+    guid: 22d870645dc70ac489d55f52da2b07e0
+  - enabled: 1
+    path: Assets/Scena_Tunnel/Scena_Tunnel.unity
+    guid: c21649bb25767ef46833ebb328af930c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2c3fcd5bae39bfc4ba96046bd69f5381,
       type: 2}
