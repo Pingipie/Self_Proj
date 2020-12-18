@@ -80,13 +80,18 @@ public class Algorithm : MonoBehaviour
             //Debug.Log(Blue[1].name);
             if (Blue[0].GetComponent<CheckInteraction>().collision)
             {
-                StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));               
+                Blue[1].AddComponent<EvenParticlesAttraction>();
+                //Blue[2].AddComponent<OddParticlesAttraction>();
+
+                print(Blue[0].GetComponentInChildren<ParticleSystem>());
+                Blue[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                //Blue[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+
+                StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                 StartCoroutine(disappear(Blue[0]));
 
-                Blue[1].GetComponent<EvenParticlesAttraction>().enabled = true;
-                Blue[2].GetComponent<OddParticlesAttraction>().enabled = true;
                 StartCoroutine(appear(Blue[1]));
-                StartCoroutine(appear(Blue[2]));
+                //StartCoroutine(appear(Blue[2]));
                 //va inserita l'apertura del media
 
                 totInteraction++;
@@ -94,7 +99,7 @@ public class Algorithm : MonoBehaviour
 
                 chronology[0] = "blue";
 
-                StartCoroutine(disappear(Green[0]));
+                //StartCoroutine(disappear(Green[0]));
                 greenInteraction = -1;
             }
 
@@ -164,7 +169,7 @@ public class Algorithm : MonoBehaviour
         {
             foreach (GameObject blueIcon in Blue)
             {
-                if (blueInteraction == 1 && blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                if (blueInteraction == 1 && blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                 {
                     StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(blueIcon));
@@ -1875,8 +1880,10 @@ public class Algorithm : MonoBehaviour
     //Coroutine per far sparire l'icona
     IEnumerator disappear(GameObject icon)
     {
-        icon.GetComponent<SphereCollider>().enabled = false;
-        icon.GetComponent<SphereCollider>().isTrigger = false;
+        icon.GetComponentInChildren<ParticleSystem>().Play();
+
+        icon.GetComponent<MeshCollider>().enabled = false;
+        icon.GetComponent<MeshCollider>().isTrigger = false;
 
         yield return new WaitForSeconds(.1f); //per feedback su controller
 
@@ -1905,7 +1912,7 @@ public class Algorithm : MonoBehaviour
             //l'apparizione di Collider e Render
 
             icon.GetComponent<MeshRenderer>().enabled = true;
-            icon.GetComponent<SphereCollider>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
         }
         else if (icon.TryGetComponent(out OddParticlesAttraction odd))
         {
@@ -1922,7 +1929,7 @@ public class Algorithm : MonoBehaviour
             //l'apparizione di Collider e Render
 
             icon.GetComponent<MeshRenderer>().enabled = true;
-            icon.GetComponent<SphereCollider>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
         }
     }
 
