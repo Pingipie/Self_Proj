@@ -26,6 +26,7 @@ public class EvenParticlesAttraction : MonoBehaviour
 
     public bool creation;
     private bool setup;
+    private bool goAll;
 
     void Awake()
     {
@@ -41,28 +42,27 @@ public class EvenParticlesAttraction : MonoBehaviour
     // The attractor target
     public Vector3 m_vParticlesTarget;
     // A cursor for the movement interpolation
-    public float m_fCursor = 1f;
+    public float m_fCursor;
     void Update()
     {
-        if (setup == false && AffectedParticles.particleCount == 200)
+        m_fCursor = Random.Range(1f, 2f);
+
+        if (setup == false && AffectedParticles.particleCount > 200)
         {
             Setup();
             setup = true;
         }
-        // Work only if we have something to work on :)
+        
         if (AffectedParticles != null && setup == true)
         {
             // Let's fetch active particles info
             m_iNumActiveParticles = AffectedParticles.GetParticles(m_rParticlesArray);
             // The attractor's target is it's world space position
             m_vParticlesTarget = m_rTransform.position;
-            // If the system is not simulating in world space, let's project the attractor's target in the system's local space
-            if (!m_bWorldPosition)
-              m_vParticlesTarget -= AffectedParticles.transform.position;
 
             //print(m_vParticlesTarget);
-            // For each active particle...
-            for (int iParticle = 0; iParticle < m_iNumActiveParticles; iParticle = iParticle + 2)
+            
+            for (int iParticle = 0; iParticle < m_iNumActiveParticles; iParticle = iParticle + 4)
             { // The movement cursor is the opposite of the normalized particle's lifetime m_fCursor = 1.0f - (m_rParticlesArray[iParticle].lifetime / m_rParticlesArray[iParticle].startLifetime); // Are we over the activation treshold? if (m_fCursor >= ActivationTreshold)
                 {
                     // Take over the particle system imposed velocity
@@ -76,12 +76,42 @@ public class EvenParticlesAttraction : MonoBehaviour
                     //m_rParticlesArray[iParticle].position = new Vector3(Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x, m_fCursor * m_fCursor),
                         //Mathf.Lerp(m_rParticlesArray[iParticle].position.y, m_vParticlesTarget.y, m_fCursor * m_fCursor), 
                         //Mathf.Lerp(m_rParticlesArray[iParticle].position.z, m_vParticlesTarget.z, m_fCursor * m_fCursor));
-                    if (Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x * 2, m_fCursor * m_fCursor) > (m_vParticlesTarget.x - 1))
+                    if (Mathf.Abs(m_rParticlesArray[iParticle].position.x - (m_vParticlesTarget.x)) < .001f)
                     {
                         if (creation == false)
                             creation = true;
 
+                        goAll = true;
                         m_rParticlesArray[iParticle].remainingLifetime = 0;
+                    }
+                }
+            }
+
+            if(goAll == true)
+            {
+                for (int iParticle = 2; iParticle < m_iNumActiveParticles; iParticle = iParticle + 4)
+                { // The movement cursor is the opposite of the normalized particle's lifetime m_fCursor = 1.0f - (m_rParticlesArray[iParticle].lifetime / m_rParticlesArray[iParticle].startLifetime); // Are we over the activation treshold? if (m_fCursor >= ActivationTreshold)
+                    {
+                        // Take over the particle system imposed velocity
+                        m_rParticlesArray[iParticle].velocity = Vector3.zero;
+
+                        //print(m_vParticlesTarget);
+                        //print(m_rParticlesArray[iParticle].position);
+                        m_rParticlesArray[iParticle].position = Vector3.MoveTowards(m_rParticlesArray[iParticle].position, m_vParticlesTarget, m_fCursor * Time.deltaTime);
+
+                        //m_rParticlesArray[iParticle].position = Vector3.Lerp(m_rParticlesArray[iParticle].position, m_vParticlesTarget, m_fCursor * m_fCursor);                    // Interpolate the movement towards the target with a nice quadratic easing					
+                        //m_rParticlesArray[iParticle].position = new Vector3(Mathf.Lerp(m_rParticlesArray[iParticle].position.x, m_vParticlesTarget.x, m_fCursor * m_fCursor),
+                        //Mathf.Lerp(m_rParticlesArray[iParticle].position.y, m_vParticlesTarget.y, m_fCursor * m_fCursor), 
+                        //Mathf.Lerp(m_rParticlesArray[iParticle].position.z, m_vParticlesTarget.z, m_fCursor * m_fCursor));
+                        if (Mathf.Abs(m_rParticlesArray[iParticle].position.x - (m_vParticlesTarget.x)) < .001f)
+                        {
+                            if (creation == false)
+                                creation = true;
+
+                            goAll = true;
+                            m_rParticlesArray[iParticle].remainingLifetime = 0;
+                            AffectedParticles.Stop();
+                        }
                     }
                 }
             }

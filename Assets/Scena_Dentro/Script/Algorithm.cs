@@ -81,17 +81,16 @@ public class Algorithm : MonoBehaviour
             if (Blue[0].GetComponent<CheckInteraction>().collision)
             {
                 Blue[1].AddComponent<EvenParticlesAttraction>();
-                //Blue[2].AddComponent<OddParticlesAttraction>();
+                Blue[2].AddComponent<OddParticlesAttraction>();
 
-                print(Blue[0].GetComponentInChildren<ParticleSystem>());
                 Blue[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
-                //Blue[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                Blue[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
 
                 StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                 StartCoroutine(disappear(Blue[0]));
 
                 StartCoroutine(appear(Blue[1]));
-                //StartCoroutine(appear(Blue[2]));
+                StartCoroutine(appear(Blue[2]));
                 //va inserita l'apertura del media
 
                 totInteraction++;
@@ -99,16 +98,20 @@ public class Algorithm : MonoBehaviour
 
                 chronology[0] = "blue";
 
-                //StartCoroutine(disappear(Green[0]));
+                StartCoroutine(destroy(Green[0]));
                 greenInteraction = -1;
             }
 
             else if (Red[0].GetComponent<CheckInteraction>().collision)
             {
+                Red[1].AddComponent<EvenParticlesAttraction>();
+                Red[2].AddComponent<OddParticlesAttraction>();
+
+                Red[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+                Red[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Red[0], MovieMedia[0]));
                 StartCoroutine(disappear(Red[0]));
-
-                //va inserita l'apertura del media
 
                 StartCoroutine(appear(Red[1]));
                 StartCoroutine(appear(Red[2]));
@@ -118,12 +121,18 @@ public class Algorithm : MonoBehaviour
 
                 chronology[0] = "red";
 
-                StartCoroutine(disappear(Green[0]));
+                StartCoroutine(destroy(Green[0]));
                 greenInteraction = -1;
             }
 
             else if (Yellow[0].GetComponent<CheckInteraction>().collision)
             {
+                Yellow[1].AddComponent<EvenParticlesAttraction>();
+                Yellow[2].AddComponent<OddParticlesAttraction>();
+
+                Yellow[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+                Yellow[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[0]));
 
@@ -137,12 +146,18 @@ public class Algorithm : MonoBehaviour
 
                 chronology[0] = "yellow";
 
-                StartCoroutine(disappear(Green[0]));
+                StartCoroutine(destroy(Green[0]));
                 greenInteraction = -1;
             }
 
             else if (Green[0].GetComponent<CheckInteraction>().collision)
             {
+                Green[1].AddComponent<EvenParticlesAttraction>();
+                Green[2].AddComponent<OddParticlesAttraction>();
+
+                Green[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+                Green[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[0]));
 
@@ -156,7 +171,7 @@ public class Algorithm : MonoBehaviour
 
                 chronology[0] = "green";
 
-                StartCoroutine(disappear(Yellow[0]));
+                StartCoroutine(destroy(Yellow[0]));
                 yellowInteraction = -1;
             }
 
@@ -171,6 +186,12 @@ public class Algorithm : MonoBehaviour
             {
                 if (blueInteraction == 1 && blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                 {
+                    Blue[3].AddComponent<EvenParticlesAttraction>();
+                    Blue[4].AddComponent<OddParticlesAttraction>();
+
+                    Blue[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                    Blue[4].GetComponent<OddParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(blueIcon));
 
@@ -186,6 +207,12 @@ public class Algorithm : MonoBehaviour
 
             if (blueInteraction == 0 && Blue[0].GetComponent<CheckInteraction>().collision)
             {
+                Blue[1].AddComponent<EvenParticlesAttraction>();
+                Blue[2].AddComponent<OddParticlesAttraction>();
+
+                Blue[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                Blue[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                 StartCoroutine(disappear(Blue[0]));
 
@@ -200,6 +227,12 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 1 && Red[1].GetComponent<CheckInteraction>().collision)
             {
+                Red[3].AddComponent<EvenParticlesAttraction>();
+                Red[4].AddComponent<OddParticlesAttraction>();
+
+                Red[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Red[1].GetComponentInChildren<ParticleSystem>();
+                Red[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Red[1].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Red[1], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[1]));
 
@@ -214,6 +247,12 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 1 && Red[2].GetComponent<CheckInteraction>().collision)
             {
+                Red[3].AddComponent<EvenParticlesAttraction>();
+                Red[4].AddComponent<OddParticlesAttraction>();
+
+                Red[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Red[2].GetComponentInChildren<ParticleSystem>();
+                Red[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Red[2].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Red[2], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[2]));
 
@@ -228,6 +267,12 @@ public class Algorithm : MonoBehaviour
 
             else if (redInteraction == 0 && Red[0].GetComponent<CheckInteraction>().collision)
             {
+                Red[1].AddComponent<EvenParticlesAttraction>();
+                Red[2].AddComponent<OddParticlesAttraction>();
+
+                Red[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+                Red[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                 StartCoroutine(disappear(Red[0]));
 
@@ -242,6 +287,12 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 1 && Yellow[1].GetComponent<CheckInteraction>().collision)
             {
+                Yellow[3].AddComponent<EvenParticlesAttraction>();
+                Yellow[4].AddComponent<OddParticlesAttraction>();
+
+                Yellow[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Yellow[1].GetComponentInChildren<ParticleSystem>();
+                Yellow[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Yellow[1].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Yellow[1], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[1]));
 
@@ -256,6 +307,12 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 1 && Yellow[2].GetComponent<CheckInteraction>().collision)
             {
+                Yellow[3].AddComponent<EvenParticlesAttraction>();
+                Yellow[4].AddComponent<OddParticlesAttraction>();
+
+                Yellow[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Yellow[2].GetComponentInChildren<ParticleSystem>();
+                Yellow[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Yellow[2].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Yellow[2], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[2]));
 
@@ -270,6 +327,12 @@ public class Algorithm : MonoBehaviour
 
             else if (yellowInteraction == 0 && Yellow[0].GetComponent<CheckInteraction>().collision)
             {
+                Yellow[1].AddComponent<EvenParticlesAttraction>();
+                Yellow[2].AddComponent<OddParticlesAttraction>();
+
+                Yellow[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+                Yellow[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                 StartCoroutine(disappear(Yellow[0]));
 
@@ -284,6 +347,12 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 1 && Green[1].GetComponent<CheckInteraction>().collision)
             {
+                Green[3].AddComponent<EvenParticlesAttraction>();
+                Green[4].AddComponent<OddParticlesAttraction>();
+
+                Green[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Green[1].GetComponentInChildren<ParticleSystem>();
+                Green[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Green[1].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Green[1], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[1]));
 
@@ -298,6 +367,12 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 1 && Green[2].GetComponent<CheckInteraction>().collision)
             {
+                Green[3].AddComponent<EvenParticlesAttraction>();
+                Green[4].AddComponent<OddParticlesAttraction>();
+
+                Green[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = Green[2].GetComponentInChildren<ParticleSystem>();
+                Green[4].GetComponent<OddParticlesAttraction>().AffectedParticles = Green[2].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Green[2], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[2]));
 
@@ -312,6 +387,12 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 0 && Green[0].GetComponent<CheckInteraction>().collision)
             {
+                Green[1].AddComponent<EvenParticlesAttraction>();
+                Green[2].AddComponent<OddParticlesAttraction>();
+
+                Green[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+                Green[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+
                 StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                 StartCoroutine(disappear(Green[0]));
 
@@ -332,15 +413,21 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[5].AddComponent<EvenParticlesAttraction>();
+                        Blue[6].AddComponent<OddParticlesAttraction>();
+
+                        Blue[5].GetComponent<EvenParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[6].GetComponent<OddParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
                         StartCoroutine(appear(Blue[5]));
                         StartCoroutine(appear(Blue[6]));
 
-                        StartCoroutine(disappear(Yellow[0]));
+                        StartCoroutine(destroy(Yellow[0]));
                         yellowInteraction = -1;
 
                         totInteraction++;
@@ -356,8 +443,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[3].AddComponent<EvenParticlesAttraction>();
+                        Blue[4].AddComponent<OddParticlesAttraction>();
+
+                        Blue[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[4].GetComponent<OddParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -377,6 +470,12 @@ public class Algorithm : MonoBehaviour
             {
                 if (Blue[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Blue[1].AddComponent<EvenParticlesAttraction>();
+                    Blue[2].AddComponent<OddParticlesAttraction>();
+
+                    Blue[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                    Blue[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(Blue[0]));
 
@@ -394,8 +493,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[5].AddComponent<EvenParticlesAttraction>();
+                        Red[6].AddComponent<OddParticlesAttraction>();
+
+                        Red[5].GetComponent<EvenParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[6].GetComponent<OddParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -418,8 +523,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[3].AddComponent<EvenParticlesAttraction>();
+                        Red[4].AddComponent<OddParticlesAttraction>();
+
+                        Red[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[4].GetComponent<OddParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -439,6 +550,12 @@ public class Algorithm : MonoBehaviour
             {
                 if (Red[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Red[1].AddComponent<EvenParticlesAttraction>();
+                    Red[2].AddComponent<OddParticlesAttraction>();
+
+                    Red[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+                    Red[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                     StartCoroutine(disappear(Red[0]));
 
@@ -456,8 +573,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[5].AddComponent<EvenParticlesAttraction>();
+                        Yellow[6].AddComponent<OddParticlesAttraction>();
+
+                        Yellow[5].GetComponent<EvenParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[6].GetComponent<OddParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -480,8 +603,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[3].AddComponent<EvenParticlesAttraction>();
+                        Yellow[4].AddComponent<OddParticlesAttraction>();
+
+                        Yellow[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[4].GetComponent<OddParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -501,6 +630,12 @@ public class Algorithm : MonoBehaviour
             {
                 if (Yellow[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Yellow[1].AddComponent<EvenParticlesAttraction>();
+                    Yellow[2].AddComponent<OddParticlesAttraction>();
+
+                    Yellow[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+                    Yellow[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                     StartCoroutine(disappear(Yellow[0]));
 
@@ -518,8 +653,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Yellow)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[5].AddComponent<EvenParticlesAttraction>();
+                        Green[6].AddComponent<OddParticlesAttraction>();
+
+                        Green[5].GetComponent<EvenParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[6].GetComponent<OddParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -542,8 +683,14 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[3].AddComponent<EvenParticlesAttraction>();
+                        Green[4].AddComponent<OddParticlesAttraction>();
+
+                        Green[3].GetComponent<EvenParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[4].GetComponent<OddParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -563,6 +710,12 @@ public class Algorithm : MonoBehaviour
             {
                 if (Green[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Green[1].AddComponent<EvenParticlesAttraction>();
+                    Green[2].AddComponent<OddParticlesAttraction>();
+
+                    Green[1].GetComponent<EvenParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+                    Green[2].GetComponent<OddParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                     StartCoroutine(disappear(Green[0]));
 
@@ -584,8 +737,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[7].AddComponent<OneParticlesAttraction>();
+                        Blue[8].AddComponent<TwoParticlesAttraction>();
+                        Blue[9].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[7].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[8].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[9].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -593,7 +754,7 @@ public class Algorithm : MonoBehaviour
                         StartCoroutine(appear(Blue[8]));
                         StartCoroutine(appear(Blue[9]));
 
-                        StartCoroutine(disappear(Red[0]));
+                        StartCoroutine(destroy(Red[0]));
 
                         totInteraction++;
                         blueInteraction++;
@@ -608,8 +769,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[5].AddComponent<OneParticlesAttraction>();
+                        Blue[6].AddComponent<TwoParticlesAttraction>();
+                        Blue[7].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[5].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[6].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[7].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -619,12 +788,12 @@ public class Algorithm : MonoBehaviour
 
                         if (redInteraction == 0)
                         {
-                            StartCoroutine(disappear(Red[0]));
+                            StartCoroutine(destroy(Red[0]));
                             redInteraction = -1;
                         }
                         else if (yellowInteraction == 0)
                         {
-                            StartCoroutine(disappear(Yellow[0]));
+                            StartCoroutine(destroy(Yellow[0]));
                             yellowInteraction = -1;
                         }
 
@@ -641,8 +810,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[3].AddComponent<OneParticlesAttraction>();
+                        Blue[4].AddComponent<TwoParticlesAttraction>();
+                        Blue[5].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[3].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[4].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[5].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -660,7 +837,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Red)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -668,7 +845,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject yellowIcon in Yellow)
                                     {
-                                        StartCoroutine(disappear(yellowIcon));
+                                        StartCoroutine(destroy(yellowIcon));
                                         yellowInteraction = -1;
                                     }
                                 }
@@ -676,7 +853,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject greenIcon in Green)
                                     {
-                                        StartCoroutine(disappear(greenIcon));
+                                        StartCoroutine(destroy(greenIcon));
                                         greenInteraction = -1;
                                     }
                                 }
@@ -687,7 +864,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Red)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -695,7 +872,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject yellowIcon in Yellow)
                                     {
-                                        StartCoroutine(disappear(yellowIcon));
+                                        StartCoroutine(destroy(yellowIcon));
                                         yellowInteraction = -1;
                                     }
                                 }
@@ -703,7 +880,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject greenIcon in Green)
                                     {
-                                        StartCoroutine(disappear(greenIcon));
+                                        StartCoroutine(destroy(greenIcon));
                                         greenInteraction = -1;
                                     }
                                 }
@@ -715,12 +892,12 @@ public class Algorithm : MonoBehaviour
                         {
                             if (redInteraction == 0)
                             {
-                                StartCoroutine(disappear(Red[0]));
+                                StartCoroutine(destroy(Red[0]));
                                 redInteraction = -1;
                             }
                             else
                             {
-                                StartCoroutine(disappear(Yellow[0]));
+                                StartCoroutine(destroy(Yellow[0]));
                                 yellowInteraction = -1;
                             }
                         }
@@ -738,6 +915,14 @@ public class Algorithm : MonoBehaviour
             {
                 if (Blue[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Blue[1].AddComponent<OneParticlesAttraction>();
+                    Blue[2].AddComponent<TwoParticlesAttraction>();
+                    Blue[3].AddComponent<ThreeParticlesAttraction>();
+
+                    Blue[1].GetComponent<OneParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                    Blue[2].GetComponent<TwoParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+                    Blue[3].GetComponent<ThreeParticlesAttraction>().AffectedParticles = Blue[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Blue[0], InformationMedia[blueInteraction]));
                     StartCoroutine(disappear(Blue[0]));
 
@@ -749,7 +934,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject redIcon in Red)
                         {
-                            StartCoroutine(disappear(redIcon));
+                            StartCoroutine(destroy(redIcon));
                             redInteraction = -1;
                         }
                     }
@@ -757,7 +942,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject yellowIcon in Red)
                         {
-                            StartCoroutine(disappear(yellowIcon));
+                            StartCoroutine(destroy(yellowIcon));
                             yellowInteraction = -1;
                         }
                     }
@@ -765,7 +950,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject greenIcon in Green)
                         {
-                            StartCoroutine(disappear(greenIcon));
+                            StartCoroutine(destroy(greenIcon));
                             yellowInteraction = -1;
                         }
                     }
@@ -781,8 +966,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[7].AddComponent<OneParticlesAttraction>();
+                        Red[8].AddComponent<TwoParticlesAttraction>();
+                        Red[9].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[7].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[8].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[9].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -790,7 +983,7 @@ public class Algorithm : MonoBehaviour
                         StartCoroutine(appear(Red[8]));
                         StartCoroutine(appear(Red[9]));
 
-                        StartCoroutine(disappear(Blue[0]));
+                        StartCoroutine(destroy(Blue[0]));
 
                         totInteraction++;
                         redInteraction++;
@@ -805,8 +998,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[5].AddComponent<OneParticlesAttraction>();
+                        Red[6].AddComponent<TwoParticlesAttraction>();
+                        Red[7].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[5].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[6].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[7].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -816,12 +1017,12 @@ public class Algorithm : MonoBehaviour
 
                         if (blueInteraction == 0)
                         {
-                            StartCoroutine(disappear(Blue[0]));
+                            StartCoroutine(destroy(Blue[0]));
                             blueInteraction = -1;
                         }
                         else if (yellowInteraction == 0)
                         {
-                            StartCoroutine(disappear(Yellow[0]));
+                            StartCoroutine(destroy(Yellow[0]));
                             yellowInteraction = -1;
                         }
 
@@ -838,8 +1039,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[3].AddComponent<OneParticlesAttraction>();
+                        Red[4].AddComponent<TwoParticlesAttraction>();
+                        Red[5].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[3].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[4].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[5].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -857,7 +1066,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -865,7 +1074,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject yellowIcon in Yellow)
                                     {
-                                        StartCoroutine(disappear(yellowIcon));
+                                        StartCoroutine(destroy(yellowIcon));
                                         yellowInteraction = -1;
                                     }
                                 }
@@ -873,7 +1082,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject greenIcon in Green)
                                     {
-                                        StartCoroutine(disappear(greenIcon));
+                                        StartCoroutine(destroy(greenIcon));
                                         greenInteraction = -1;
                                     }
                                 }
@@ -884,7 +1093,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         blueInteraction = -1;
                                     }
                                 }
@@ -892,7 +1101,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject yellowIcon in Yellow)
                                     {
-                                        StartCoroutine(disappear(yellowIcon));
+                                        StartCoroutine(destroy(yellowIcon));
                                         yellowInteraction = -1;
                                     }
                                 }
@@ -900,7 +1109,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject greenIcon in Green)
                                     {
-                                        StartCoroutine(disappear(greenIcon));
+                                        StartCoroutine(destroy(greenIcon));
                                         greenInteraction = -1;
                                     }
                                 }
@@ -912,12 +1121,12 @@ public class Algorithm : MonoBehaviour
                         {
                             if (blueInteraction == 0)
                             {
-                                StartCoroutine(disappear(Blue[0]));
+                                StartCoroutine(destroy(Blue[0]));
                                 blueInteraction = -1;
                             }
                             else
                             {
-                                StartCoroutine(disappear(Yellow[0]));
+                                StartCoroutine(destroy(Yellow[0]));
                                 yellowInteraction = -1;
                             }
                         }
@@ -935,6 +1144,14 @@ public class Algorithm : MonoBehaviour
             {
                 if (Red[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Red[1].AddComponent<OneParticlesAttraction>();
+                    Red[2].AddComponent<TwoParticlesAttraction>();
+                    Red[3].AddComponent<ThreeParticlesAttraction>();
+
+                    Red[1].GetComponent<OneParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+                    Red[2].GetComponent<TwoParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+                    Red[3].GetComponent<ThreeParticlesAttraction>().AffectedParticles = Red[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Red[0], MovieMedia[redInteraction]));
                     StartCoroutine(disappear(Red[0]));
 
@@ -947,7 +1164,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject blueIcon in Blue)
                         {
-                            StartCoroutine(disappear(blueIcon));
+                            StartCoroutine(destroy(blueIcon));
                             blueInteraction = -1;
                         }
                     }
@@ -955,7 +1172,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject yellowIcon in Red)
                         {
-                            StartCoroutine(disappear(yellowIcon));
+                            StartCoroutine(destroy(yellowIcon));
                             yellowInteraction = -1;
                         }
                     }
@@ -963,7 +1180,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject greenIcon in Green)
                         {
-                            StartCoroutine(disappear(greenIcon));
+                            StartCoroutine(destroy(greenIcon));
                             yellowInteraction = -1;
                         }
                     }
@@ -979,8 +1196,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[7].AddComponent<OneParticlesAttraction>();
+                        Yellow[8].AddComponent<TwoParticlesAttraction>();
+                        Yellow[9].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[7].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[8].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[9].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -988,7 +1213,7 @@ public class Algorithm : MonoBehaviour
                         StartCoroutine(appear(Yellow[8]));
                         StartCoroutine(appear(Yellow[9]));
 
-                        StartCoroutine(disappear(Blue[0]));
+                        StartCoroutine(destroy(Blue[0]));
 
                         totInteraction++;
                         yellowInteraction++;
@@ -1003,8 +1228,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[5].AddComponent<OneParticlesAttraction>();
+                        Yellow[6].AddComponent<TwoParticlesAttraction>();
+                        Yellow[7].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[5].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[6].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[7].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1014,12 +1247,12 @@ public class Algorithm : MonoBehaviour
 
                         if (blueInteraction == 0)
                         {
-                            StartCoroutine(disappear(Blue[0]));
+                            StartCoroutine(destroy(Blue[0]));
                             blueInteraction = -1;
                         }
                         else if (redInteraction == 0)
                         {
-                            StartCoroutine(disappear(Red[0]));
+                            StartCoroutine(destroy(Red[0]));
                             redInteraction = -1;
                         }
 
@@ -1036,8 +1269,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[3].AddComponent<OneParticlesAttraction>();
+                        Yellow[4].AddComponent<TwoParticlesAttraction>();
+                        Yellow[5].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[3].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[4].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[5].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1055,7 +1296,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         blueInteraction = -1;
                                     }
                                 }
@@ -1063,7 +1304,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Red)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -1074,7 +1315,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         blueInteraction = -1;
                                     }
                                 }
@@ -1082,7 +1323,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Yellow)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -1094,12 +1335,12 @@ public class Algorithm : MonoBehaviour
                         {
                             if (blueInteraction == 0)
                             {
-                                StartCoroutine(disappear(Blue[0]));
+                                StartCoroutine(destroy(Blue[0]));
                                 blueInteraction = -1;
                             }
                             else
                             {
-                                StartCoroutine(disappear(Red[0]));
+                                StartCoroutine(destroy(Red[0]));
                                 redInteraction = -1;
                             }
                         }
@@ -1117,6 +1358,14 @@ public class Algorithm : MonoBehaviour
             {
                 if (Yellow[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Yellow[1].AddComponent<OneParticlesAttraction>();
+                    Yellow[2].AddComponent<TwoParticlesAttraction>();
+                    Yellow[3].AddComponent<ThreeParticlesAttraction>();
+
+                    Yellow[1].GetComponent<OneParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+                    Yellow[2].GetComponent<TwoParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+                    Yellow[3].GetComponent<ThreeParticlesAttraction>().AffectedParticles = Yellow[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Yellow[0], WebStarMedia[yellowInteraction]));
                     StartCoroutine(disappear(Yellow[0]));
 
@@ -1128,7 +1377,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject blueIcon in Blue)
                         {
-                            StartCoroutine(disappear(blueIcon));
+                            StartCoroutine(destroy(blueIcon));
                             blueInteraction = -1;
                         }
                     }
@@ -1136,7 +1385,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject redIcon in Red)
                         {
-                            StartCoroutine(disappear(redIcon));
+                            StartCoroutine(destroy(redIcon));
                             redInteraction = -1;
                         }
                     }
@@ -1152,8 +1401,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[7].AddComponent<OneParticlesAttraction>();
+                        Green[8].AddComponent<TwoParticlesAttraction>();
+                        Green[9].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[7].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[8].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[9].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1161,7 +1418,7 @@ public class Algorithm : MonoBehaviour
                         StartCoroutine(appear(Green[8]));
                         StartCoroutine(appear(Green[9]));
 
-                        StartCoroutine(disappear(Blue[0]));
+                        StartCoroutine(destroy(Blue[0]));
 
                         totInteraction++;
                         greenInteraction++;
@@ -1176,8 +1433,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[5].AddComponent<OneParticlesAttraction>();
+                        Green[6].AddComponent<TwoParticlesAttraction>();
+                        Green[7].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[5].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[6].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[7].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1187,12 +1452,12 @@ public class Algorithm : MonoBehaviour
 
                         if (blueInteraction == 0)
                         {
-                            StartCoroutine(disappear(Blue[0]));
+                            StartCoroutine(destroy(Blue[0]));
                             blueInteraction = -1;
                         }
                         else if (redInteraction == 0)
                         {
-                            StartCoroutine(disappear(Red[0]));
+                            StartCoroutine(destroy(Red[0]));
                             redInteraction = -1;
                         }
 
@@ -1207,16 +1472,24 @@ public class Algorithm : MonoBehaviour
 
             else if (greenInteraction == 1)
             {
-                foreach (GameObject greenIcon in Yellow)
+                foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[3].AddComponent<OneParticlesAttraction>();
+                        Green[4].AddComponent<TwoParticlesAttraction>();
+                        Green[5].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[3].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[4].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[5].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
-                        StartCoroutine(appear(Yellow[3]));
-                        StartCoroutine(appear(Yellow[4]));
-                        StartCoroutine(appear(Yellow[5]));
+                        StartCoroutine(appear(Green[3]));
+                        StartCoroutine(appear(Green[4]));
+                        StartCoroutine(appear(Green[5]));
 
                         //situazione in cui abbiamo 3 rossi, 3 gialli, 3 blu
                         //togliamo quello scelto più indietro
@@ -1228,7 +1501,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         blueInteraction = -1;
                                     }
                                 }
@@ -1236,7 +1509,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Red)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -1247,7 +1520,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject blueIcon in Blue)
                                     {
-                                        StartCoroutine(disappear(blueIcon));
+                                        StartCoroutine(destroy(blueIcon));
                                         blueInteraction = -1;
                                     }
                                 }
@@ -1255,7 +1528,7 @@ public class Algorithm : MonoBehaviour
                                 {
                                     foreach (GameObject redIcon in Red)
                                     {
-                                        StartCoroutine(disappear(redIcon));
+                                        StartCoroutine(destroy(redIcon));
                                         redInteraction = -1;
                                     }
                                 }
@@ -1267,12 +1540,12 @@ public class Algorithm : MonoBehaviour
                         {
                             if (blueInteraction == 0)
                             {
-                                StartCoroutine(disappear(Blue[0]));
+                                StartCoroutine(destroy(Blue[0]));
                                 blueInteraction = -1;
                             }
                             else
                             {
-                                StartCoroutine(disappear(Red[0]));
+                                StartCoroutine(destroy(Red[0]));
                                 redInteraction = -1;
                             }
                         }
@@ -1290,6 +1563,14 @@ public class Algorithm : MonoBehaviour
             {
                 if (Green[0].GetComponent<CheckInteraction>().collision)
                 {
+                    Green[1].AddComponent<OneParticlesAttraction>();
+                    Green[2].AddComponent<TwoParticlesAttraction>();
+                    Green[3].AddComponent<ThreeParticlesAttraction>();
+
+                    Green[1].GetComponent<OneParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+                    Green[2].GetComponent<TwoParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+                    Green[3].GetComponent<ThreeParticlesAttraction>().AffectedParticles = Green[0].GetComponentInChildren<ParticleSystem>();
+
                     StartCoroutine(AssignMedia(Green[0], WebStarMedia[greenInteraction]));
                     StartCoroutine(disappear(Green[0]));
 
@@ -1301,7 +1582,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject blueIcon in Blue)
                         {
-                            StartCoroutine(disappear(blueIcon));
+                            StartCoroutine(destroy(blueIcon));
                             blueInteraction = -1;
                         }
                     }
@@ -1309,7 +1590,7 @@ public class Algorithm : MonoBehaviour
                     {
                         foreach (GameObject redIcon in Red)
                         {
-                            StartCoroutine(disappear(redIcon));
+                            StartCoroutine(destroy(redIcon));
                             redInteraction = -1;
                         }
                     }
@@ -1329,8 +1610,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[10].AddComponent<OneParticlesAttraction>();
+                        Blue[11].AddComponent<TwoParticlesAttraction>();
+                        Blue[12].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[10].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[11].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[12].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -1351,8 +1640,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[8].AddComponent<OneParticlesAttraction>();
+                        Blue[9].AddComponent<TwoParticlesAttraction>();
+                        Blue[10].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[8].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[9].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[10].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -1367,7 +1664,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1375,7 +1672,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject yellowIcon in Yellow)
                                 {
-                                    StartCoroutine(disappear(yellowIcon));
+                                    StartCoroutine(destroy(yellowIcon));
                                     yellowInteraction = -1;
                                 }
                             }
@@ -1383,7 +1680,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject greenIcon in Green)
                                 {
-                                    StartCoroutine(disappear(greenIcon));
+                                    StartCoroutine(destroy(greenIcon));
                                     greenInteraction = -1;
                                 }
                             }
@@ -1402,8 +1699,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[6].AddComponent<OneParticlesAttraction>();
+                        Blue[7].AddComponent<TwoParticlesAttraction>();
+                        Blue[8].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[6].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[7].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[8].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -1417,7 +1722,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1425,7 +1730,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject yellowIcon in Yellow)
                                 {
-                                    StartCoroutine(disappear(yellowIcon));
+                                    StartCoroutine(destroy(yellowIcon));
                                     yellowInteraction = -1;
                                 }
                             }
@@ -1433,7 +1738,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject greenIcon in Green)
                                 {
-                                    StartCoroutine(disappear(greenIcon));
+                                    StartCoroutine(destroy(greenIcon));
                                     greenInteraction = -1;
                                 }
                             }
@@ -1452,8 +1757,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject blueIcon in Blue)
                 {
-                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<SphereCollider>().enabled)
+                    if (blueIcon.GetComponent<CheckInteraction>().collision && blueIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Blue[4].AddComponent<OneParticlesAttraction>();
+                        Blue[5].AddComponent<TwoParticlesAttraction>();
+                        Blue[6].AddComponent<ThreeParticlesAttraction>();
+
+                        Blue[4].GetComponent<OneParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[5].GetComponent<TwoParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+                        Blue[6].GetComponent<ThreeParticlesAttraction>().AffectedParticles = blueIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(blueIcon, InformationMedia[blueInteraction]));
                         StartCoroutine(disappear(blueIcon));
 
@@ -1474,8 +1787,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[10].AddComponent<OneParticlesAttraction>();
+                        Red[11].AddComponent<TwoParticlesAttraction>();
+                        Red[12].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[10].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[11].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[12].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -1496,8 +1817,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[8].AddComponent<OneParticlesAttraction>();
+                        Red[9].AddComponent<TwoParticlesAttraction>();
+                        Red[10].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[8].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[9].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[10].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -1512,7 +1841,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1520,7 +1849,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject yellowIcon in Yellow)
                                 {
-                                    StartCoroutine(disappear(yellowIcon));
+                                    StartCoroutine(destroy(yellowIcon));
                                     yellowInteraction = -1;
                                 }
                             }
@@ -1528,7 +1857,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject greenIcon in Green)
                                 {
-                                    StartCoroutine(disappear(greenIcon));
+                                    StartCoroutine(destroy(greenIcon));
                                     greenInteraction = -1;
                                 }
                             }
@@ -1547,8 +1876,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[6].AddComponent<OneParticlesAttraction>();
+                        Red[7].AddComponent<TwoParticlesAttraction>();
+                        Red[8].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[6].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[7].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[8].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -1562,7 +1899,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1570,7 +1907,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject yellowIcon in Yellow)
                                 {
-                                    StartCoroutine(disappear(yellowIcon));
+                                    StartCoroutine(destroy(yellowIcon));
                                     yellowInteraction = -1;
                                 }
                             }
@@ -1578,7 +1915,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject greenIcon in Green)
                                 {
-                                    StartCoroutine(disappear(greenIcon));
+                                    StartCoroutine(destroy(greenIcon));
                                     greenInteraction = -1;
                                 }
                             }
@@ -1597,8 +1934,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject redIcon in Red)
                 {
-                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<SphereCollider>().enabled)
+                    if (redIcon.GetComponent<CheckInteraction>().collision && redIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Red[4].AddComponent<OneParticlesAttraction>();
+                        Red[5].AddComponent<TwoParticlesAttraction>();
+                        Red[6].AddComponent<ThreeParticlesAttraction>();
+
+                        Red[4].GetComponent<OneParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[5].GetComponent<TwoParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+                        Red[6].GetComponent<ThreeParticlesAttraction>().AffectedParticles = redIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(redIcon, MovieMedia[redInteraction]));
                         StartCoroutine(disappear(redIcon));
 
@@ -1619,8 +1964,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[10].AddComponent<OneParticlesAttraction>();
+                        Yellow[11].AddComponent<TwoParticlesAttraction>();
+                        Yellow[12].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[10].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[11].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[12].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1641,8 +1994,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Red)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[8].AddComponent<OneParticlesAttraction>();
+                        Yellow[9].AddComponent<TwoParticlesAttraction>();
+                        Yellow[10].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[8].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[9].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[10].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1657,7 +2018,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1665,7 +2026,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1684,8 +2045,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[6].AddComponent<OneParticlesAttraction>();
+                        Yellow[7].AddComponent<TwoParticlesAttraction>();
+                        Yellow[8].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[6].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[7].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[8].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1699,7 +2068,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1707,7 +2076,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1726,8 +2095,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject yellowIcon in Yellow)
                 {
-                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<SphereCollider>().enabled)
+                    if (yellowIcon.GetComponent<CheckInteraction>().collision && yellowIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Yellow[4].AddComponent<OneParticlesAttraction>();
+                        Yellow[5].AddComponent<TwoParticlesAttraction>();
+                        Yellow[6].AddComponent<ThreeParticlesAttraction>();
+
+                        Yellow[4].GetComponent<OneParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[5].GetComponent<TwoParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+                        Yellow[6].GetComponent<ThreeParticlesAttraction>().AffectedParticles = yellowIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(yellowIcon, WebStarMedia[yellowInteraction]));
                         StartCoroutine(disappear(yellowIcon));
 
@@ -1748,8 +2125,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[10].AddComponent<OneParticlesAttraction>();
+                        Green[11].AddComponent<TwoParticlesAttraction>();
+                        Green[12].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[10].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[11].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[12].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1770,8 +2155,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[8].AddComponent<OneParticlesAttraction>();
+                        Green[8].AddComponent<TwoParticlesAttraction>();
+                        Green[10].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[8].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[9].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[10].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1786,7 +2179,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1794,7 +2187,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1813,8 +2206,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[6].AddComponent<OneParticlesAttraction>();
+                        Green[7].AddComponent<TwoParticlesAttraction>();
+                        Green[8].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[6].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[7].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[8].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1828,7 +2229,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject blueIcon in Blue)
                                 {
-                                    StartCoroutine(disappear(blueIcon));
+                                    StartCoroutine(destroy(blueIcon));
                                     blueInteraction = -1;
                                 }
                             }
@@ -1836,7 +2237,7 @@ public class Algorithm : MonoBehaviour
                             {
                                 foreach (GameObject redIcon in Red)
                                 {
-                                    StartCoroutine(disappear(redIcon));
+                                    StartCoroutine(destroy(redIcon));
                                     redInteraction = -1;
                                 }
                             }
@@ -1855,8 +2256,16 @@ public class Algorithm : MonoBehaviour
             {
                 foreach (GameObject greenIcon in Green)
                 {
-                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<SphereCollider>().enabled)
+                    if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
+                        Green[4].AddComponent<OneParticlesAttraction>();
+                        Green[5].AddComponent<TwoParticlesAttraction>();
+                        Green[6].AddComponent<ThreeParticlesAttraction>();
+
+                        Green[4].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[5].GetComponent<TwoParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+                        Green[6].GetComponent<ThreeParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
+
                         StartCoroutine(AssignMedia(greenIcon, WebStarMedia[greenInteraction]));
                         StartCoroutine(disappear(greenIcon));
 
@@ -1881,15 +2290,36 @@ public class Algorithm : MonoBehaviour
     IEnumerator disappear(GameObject icon)
     {
         icon.GetComponentInChildren<ParticleSystem>().Play();
-
         icon.GetComponent<MeshCollider>().enabled = false;
-        icon.GetComponent<MeshCollider>().isTrigger = false;
+        float i = 0;
+        while(i < 1.1f)
+        {
+            icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+            i += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
+        //icon.GetComponent<MeshCollider>().enabled = false;
+        //icon.GetComponent<MeshCollider>().isTrigger = false;
 
         yield return new WaitForSeconds(.1f); //per feedback su controller
 
         //va inserita l'animazione della sparizione, si potrebbe usare un bool associato all'animazione poi per far partire
         //la sparizione di Collider e Render
         //comunque vanno tolti Render e Collider per diminuire il peso grafico
+
+        icon.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    IEnumerator destroy (GameObject icon)
+    {
+        icon.GetComponent<MeshCollider>().enabled = false;
+        float i = 0;
+        while (i < 1.1f)
+        {
+            icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+            i += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
 
         icon.GetComponent<MeshRenderer>().enabled = false;
     }
@@ -1901,7 +2331,7 @@ public class Algorithm : MonoBehaviour
         {
             while (icon.GetComponent<EvenParticlesAttraction>().creation == false)
             {
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(.1f);
             }
             print(icon.GetComponentInChildren<ParticleSystem>());
             icon.GetComponentInChildren<ParticleSystem>().Play();
@@ -1911,14 +2341,25 @@ public class Algorithm : MonoBehaviour
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
 
+            float i = 1.5f;
+            while(i > 0f)
+            {
+                icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+                i -= .01f;
+                yield return new WaitForSeconds(.01f);
+            }
+
             icon.GetComponent<MeshRenderer>().enabled = true;
             icon.GetComponent<MeshCollider>().enabled = true;
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
+            icon.GetComponentInChildren<ParticleSystem>().Stop();
+            icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
         }
         else if (icon.TryGetComponent(out OddParticlesAttraction odd))
         {
             while (icon.GetComponent<OddParticlesAttraction>().creation == false)
             {
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(.1f);
             }
             print(icon.GetComponentInChildren<ParticleSystem>());
             icon.GetComponentInChildren<ParticleSystem>().Play();
@@ -1928,10 +2369,107 @@ public class Algorithm : MonoBehaviour
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
 
+            float i = 1.5f;
+            while (i > 0f)
+            {
+                icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+                i -= .01f;
+                yield return new WaitForSeconds(.01f);
+            }
+
             icon.GetComponent<MeshRenderer>().enabled = true;
             icon.GetComponent<MeshCollider>().enabled = true;
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
+            icon.GetComponentInChildren<ParticleSystem>().Stop();
+            icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
         }
+        else if (icon.TryGetComponent(out OneParticlesAttraction one))
+        {
+            while (icon.GetComponent<OneParticlesAttraction>().creation == false)
+            {
+                yield return new WaitForSeconds(.1f);
+            }
+            print(icon.GetComponentInChildren<ParticleSystem>());
+            icon.GetComponentInChildren<ParticleSystem>().Play();
+
+            yield return new WaitForSeconds(3f);
+
+            //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
+            //l'apparizione di Collider e Render
+
+            float i = 1.5f;
+            while (i > 0f)
+            {
+                icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+                i -= .01f;
+                yield return new WaitForSeconds(.01f);
+            }
+
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
+            icon.GetComponentInChildren<ParticleSystem>().Stop();
+            icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
+        }
+        else if (icon.TryGetComponent(out TwoParticlesAttraction two))
+        {
+            while (icon.GetComponent<TwoParticlesAttraction>().creation == false)
+            {
+                yield return new WaitForSeconds(.1f);
+            }
+            print(icon.GetComponentInChildren<ParticleSystem>());
+            icon.GetComponentInChildren<ParticleSystem>().Play();
+
+            yield return new WaitForSeconds(3f);
+
+            //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
+            //l'apparizione di Collider e Render
+
+            float i = 1.5f;
+            while (i > 0f)
+            {
+                icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+                i -= .01f;
+                yield return new WaitForSeconds(.01f);
+            }
+
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
+            icon.GetComponentInChildren<ParticleSystem>().Stop();
+            icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
+        }
+        else if (icon.TryGetComponent(out ThreeParticlesAttraction three))
+        {
+            while (icon.GetComponent<ThreeParticlesAttraction>().creation == false)
+            {
+                yield return new WaitForSeconds(.1f);
+            }
+            print(icon.GetComponentInChildren<ParticleSystem>());
+            icon.GetComponentInChildren<ParticleSystem>().Play();
+
+            yield return new WaitForSeconds(3f);
+
+            //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
+            //l'apparizione di Collider e Render
+
+            float i = 1.5f;
+            while (i > 0f)
+            {
+                icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+                i -= .01f;
+                yield return new WaitForSeconds(.01f);
+            }
+
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
+            icon.GetComponentInChildren<ParticleSystem>().Stop();
+            icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
+        }
+
     }
+
 
     //per ordinare gli array di icone
     private GameObject[] sortArray(GameObject[] icons, int i)
