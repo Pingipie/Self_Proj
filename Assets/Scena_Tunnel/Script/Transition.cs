@@ -24,14 +24,14 @@ public class Transition : MonoBehaviour
 
     IEnumerator FirstTransitionScene()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(15);
         SceneManager.LoadSceneAsync("Scena_Dentro", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
     }
 
     IEnumerator SecondTransitionScene()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(15);
         SceneManager.LoadSceneAsync("Scena_Fuori", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
     }
