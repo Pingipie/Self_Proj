@@ -62,6 +62,14 @@ public class ChangeMesh : MonoBehaviour
         else if (counter == 3)
             avatar.transform.GetChild(3).gameObject.SetActive(true);
 
+        else if (counter == 4)
+        {
+            avatar.transform.GetChild(4).gameObject.SetActive(true);
+            avatar.transform.GetChild(5).gameObject.SetActive(true);
+        }
+        else if (counter == 5)
+            avatar.transform.GetChild(6).gameObject.SetActive(true);
+
         color = false;
     }
 }
