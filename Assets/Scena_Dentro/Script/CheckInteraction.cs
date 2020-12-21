@@ -15,7 +15,8 @@ public class CheckInteraction : MonoBehaviour
     {
         if (collider.CompareTag("Hand")) { 
             collision = true;
+            Destroy(this.GetComponent<FloaterIcon>());
             Debug.Log("collisiondetected");
-                }
+        }
     }
 }
