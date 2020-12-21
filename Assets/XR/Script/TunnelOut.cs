@@ -10,6 +10,8 @@ public class TunnelOut : MonoBehaviour
     GameObject mirrorEmpty;
     GameObject merchEmpty;
     GameObject colliderEmpty;
+    GameObject blackSphereFade;
+    GameObject Light;
 
     Algorithm algorithm;
 
@@ -30,6 +32,7 @@ public class TunnelOut : MonoBehaviour
         counter = 0;
 
         mirrorEmpty = GameObject.Find("Mirror");
+        blackSphereFade = GameObject.Find("FadeSphereBlack");
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class TunnelOut : MonoBehaviour
         {
             if (Algorithm.GetComponent<Algorithm>().totInteraction == 5 && counter == 0)
             {
+                Light = GameObject.Find("Luce");
                 counter = 1;
                 transition = 2;
                 StartCoroutine(Tunnel());
@@ -104,6 +108,19 @@ public class TunnelOut : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
+        while (blackSphereFade.GetComponent<MeshRenderer>().material.color.a < 1)
+        {
+            Color color = blackSphereFade.GetComponent<MeshRenderer>().material.color;
+            color.a += .01f;
+            Light.GetComponent<Light>().intensity -= .01f;
+            blackSphereFade.GetComponent<MeshRenderer>().material.color = color;
+            yield return new WaitForSeconds(.01f);
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.UnloadSceneAsync("Scena_Dentro");
+
         SceneManager.LoadSceneAsync("Scena_Tunnel", LoadSceneMode.Additive);
 
         algorithm = Algorithm.GetComponent<Algorithm>();
@@ -114,9 +131,13 @@ public class TunnelOut : MonoBehaviour
         yellowInteraction = algorithm.yellowInteraction;
         greenInteraction = algorithm.greenInteraction;
 
-        SceneManager.UnloadSceneAsync("Scena_Dentro");
-
-        yield return new WaitForSeconds(.3f);
+        while (blackSphereFade.GetComponent<MeshRenderer>().material.color.a > 0)
+        {
+            Color color = blackSphereFade.GetComponent<MeshRenderer>().material.color;
+            color.a -= .01f;
+            blackSphereFade.GetComponent<MeshRenderer>().material.color = color;
+            yield return new WaitForSeconds(.01f);
+        }
 
         emptyColor.GetComponent<EmptyColor>().blueInteraction = blueInteraction;
         emptyColor.GetComponent<EmptyColor>().redInteraction = redInteraction;
