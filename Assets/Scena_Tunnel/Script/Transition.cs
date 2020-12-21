@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class Transition : MonoBehaviour
 {
     public int transition;
-    private GameObject merch;
 
     void Update()
     {
@@ -35,8 +34,6 @@ public class Transition : MonoBehaviour
     {
         yield return new WaitForSeconds(13);
         SceneManager.LoadSceneAsync("Scena_Fuori", LoadSceneMode.Additive);
-        merch = GameObject.Find("Merchandising");
-        merch.SetActive(true);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
     }
 

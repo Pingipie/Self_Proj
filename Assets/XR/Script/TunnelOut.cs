@@ -7,10 +7,15 @@ public class TunnelOut : MonoBehaviour
 {
     GameObject Algorithm;
     public GameObject emptyColor;
+    GameObject mirrorEmpty;
+    GameObject merchEmpty;
+    GameObject colliderEmpty;
 
     Algorithm algorithm;
 
     int counter;
+
+    int totInteraction;
     int blueInteraction;
     int redInteraction;
     int yellowInteraction;
@@ -23,12 +28,23 @@ public class TunnelOut : MonoBehaviour
     {
         transition = 0;
         counter = 0;
+
+        mirrorEmpty = GameObject.Find("Mirror");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(GameObject.Find("Algorithm") != null && Algorithm == null)
+        if (GameObject.Find("Algorithm") != null)
+        {
+            mirrorEmpty.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        else
+        {
+            mirrorEmpty.transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        if (GameObject.Find("Algorithm") != null && Algorithm == null)
             Algorithm = GameObject.Find("Algorithm");
 
 
@@ -47,6 +63,41 @@ public class TunnelOut : MonoBehaviour
             emptyColor = GameObject.Find("ChangeColor");
             emptyColor.GetComponent<Transition>().transition = transition;
         }
+
+        if(GameObject.Find("Fade") != null)
+        {
+            mirrorEmpty.transform.GetChild(0).gameObject.SetActive(true);
+            mirrorEmpty.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            mirrorEmpty.transform.GetChild(0).gameObject.SetActive(false);
+            mirrorEmpty.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        if(GameObject.Find("Fade") != null && totInteraction == 5 && merchEmpty != null && colliderEmpty != null)
+        {
+            merchEmpty = GameObject.Find("Merchandising");
+
+            int nM;
+            nM = merchEmpty.transform.childCount;
+
+            for(int i = 0; i < nM; i++)
+            {
+                merchEmpty.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
+            colliderEmpty = GameObject.Find("ColliderRaggi");
+
+            int nC;
+            nC = colliderEmpty.transform.childCount;
+            
+            for(int j = 0; j < nC; j++)
+            {
+                colliderEmpty.transform.GetChild(j).gameObject.SetActive(true);
+            }
+        }
+
     }
 
     IEnumerator Tunnel()
@@ -56,6 +107,8 @@ public class TunnelOut : MonoBehaviour
         SceneManager.LoadSceneAsync("Scena_Tunnel", LoadSceneMode.Additive);
 
         algorithm = Algorithm.GetComponent<Algorithm>();
+
+        totInteraction = algorithm.totInteraction;
         blueInteraction = algorithm.blueInteraction;
         redInteraction = algorithm.redInteraction;
         yellowInteraction = algorithm.yellowInteraction;
