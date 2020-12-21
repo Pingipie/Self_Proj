@@ -25,18 +25,18 @@ public class Transition : MonoBehaviour
 
     IEnumerator FirstTransitionScene()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(13);
         SceneManager.LoadSceneAsync("Scena_Dentro", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1);
-        merch = GameObject.Find("Merchandising");
-        merch.SetActive(true);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
     }
 
     IEnumerator SecondTransitionScene()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(13);
         SceneManager.LoadSceneAsync("Scena_Fuori", LoadSceneMode.Additive);
+        merch = GameObject.Find("Merchandising");
+        merch.SetActive(true);
         SceneManager.UnloadSceneAsync("Scena_Tunnel");
     }
 
