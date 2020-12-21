@@ -46,22 +46,30 @@ public class FadeSphere : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         float i = 1.7f;
+        while (i > .5f)
+        {
+            this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", i);
+            i -= 0.002f;
+            yield return new WaitForSeconds(.01f);
+        }
         while (i > -1.24f)
         {
             this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", i);
-            i -= 0.01f;
+            i -= 0.008f;
             yield return new WaitForSeconds(.01f);
         }
     }
 
     IEnumerator inverseFade()
     {
-        float i = -1.24f;
-        while (i < 1.71f)
+        float i = 0f;
+        while (i < 1f)
         {
-            this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", i);
+            this.gameObject.GetComponent<Renderer>().material.SetFloat("_alpha", i);
             i += 0.05f;
             yield return new WaitForSeconds(.03f);
         }
+
+        this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", 1.7f);
     }
 }

@@ -38,13 +38,13 @@ public class ChangeMesh : MonoBehaviour
         if(color == false && Algorithm != null)
             ChangeColor();
 
-        if (Algorithm.GetComponent<Algorithm>().totInteraction == 5)
+        /*if (Algorithm.GetComponent<Algorithm>().totInteraction == 5)
         {
             blueInteraction = Algorithm.GetComponent<Algorithm>().blueInteraction;
             redInteraction = Algorithm.GetComponent<Algorithm>().redInteraction;
             yellowInteraction = Algorithm.GetComponent<Algorithm>().yellowInteraction;
             greenInteraction = Algorithm.GetComponent<Algorithm>().greenInteraction;
-        }
+        }*/
     }
 
     void ChangeColor()

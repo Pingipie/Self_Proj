@@ -33,10 +33,12 @@ public class ParticlesSpeed: MonoBehaviour
             {
                 ps.startLifetime -= .08f;
             }
+
+            ps.emissionRate -= 2.5f;
+
             yield return new WaitForSeconds(.07f);
         }
 
-        ps.emissionRate = 0;
 
     }
 }
