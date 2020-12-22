@@ -126,7 +126,7 @@ Material:
     - _DepthCutoff: 0.8
     - _DepthDensity: 0.36
     - _DetailNormalMapScale: 1
-    - _DeviceType: 0
+    - _DeviceType: 1
     - _DistanceDensity: 0.02
     - _DstBlend: 0
     - _EdgeFoamDepth: 0.2
@@ -156,7 +156,7 @@ Material:
     - _Metallic: 0
     - _MixBlackColor: 0
     - _Mode: 0
-    - _NearClip: 0.3
+    - _NearClip: 0.23
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -165,7 +165,7 @@ Material:
     - _ReflDistort: 0
     - _Reflection: 0.5
     - _ReflectionContribution: 0.5
-    - _ReflectionIntensity: 1
+    - _ReflectionIntensity: 0.5
     - _ReflectionRefraction: 0
     - _RippleDensity: 3
     - _RippleIntensity: 0.11

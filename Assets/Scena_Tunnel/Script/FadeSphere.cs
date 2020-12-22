@@ -35,7 +35,7 @@ public class FadeSphere : MonoBehaviour
             algo = GameObject.Find("Algorithm");
             StartCoroutine(inverseFade());
         }
-        else if(GameObject.Find("Fade") != null && fa == null)
+        else if(GameObject.Find("Fade") != null && fa == null && GameObject.Find("Merchandising").transform.GetChild(0).gameObject.activeSelf == true)
         {
             fa = GameObject.Find("Fade");
             StartCoroutine(inverseFade());
@@ -50,20 +50,20 @@ public class FadeSphere : MonoBehaviour
         {
             this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", i);
             i -= 0.002f;
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.0005f);
         }
         while (i > -1.24f)
         {
             this.gameObject.GetComponent<Renderer>().material.SetFloat("_vectPos", i);
             i -= 0.008f;
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.0005f);
         }
     }
 
     IEnumerator inverseFade()
     {
         float i = 0f;
-        while (i < 1f)
+        while (i < 1.0001f)
         {
             this.gameObject.GetComponent<Renderer>().material.SetFloat("_alpha", i);
             i += 0.05f;

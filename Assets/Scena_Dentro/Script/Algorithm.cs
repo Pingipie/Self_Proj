@@ -2340,20 +2340,23 @@ public class Algorithm : MonoBehaviour
 
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
+            icon.GetComponent<FloaterIcon>().enabled = false;
 
             float i = 1.5f;
-            while(i > 0f)
+            icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
+            icon.GetComponent<MeshRenderer>().enabled = true;
+            icon.GetComponent<MeshCollider>().enabled = true;
+            while (i > 0f)
             {
                 icon.GetComponent<Renderer>().material.SetFloat("_visibility", i);
                 i -= .01f;
                 yield return new WaitForSeconds(.01f);
             }
 
-            icon.GetComponent<MeshRenderer>().enabled = true;
-            icon.GetComponent<MeshCollider>().enabled = true;
             ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
             icon.GetComponentInChildren<ParticleSystem>().Stop();
             icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
+            icon.GetComponent<FloaterIcon>().enabled = true;
         }
         else if (icon.TryGetComponent(out OddParticlesAttraction odd))
         {
@@ -2489,9 +2492,9 @@ public class Algorithm : MonoBehaviour
 
     IEnumerator AssignMedia(GameObject icon, GameObject media)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
 
-        media.transform.position = new Vector3(icon.transform.position.x, icon.transform.position.y, icon.transform.position.z);
+        media.transform.position = new Vector3(icon.transform.position.x, icon.transform.position.y + 1f, icon.transform.position.z);
 
         //per video
         if (media.TryGetComponent(out MeshRenderer renderVideo) && media.TryGetComponent(out VideoPlayer player))
