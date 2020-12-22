@@ -26,10 +26,10 @@ public class Force : MonoBehaviour
         offset = player.transform.position - transform.position;
         magsqr = offset.sqrMagnitude;
 
-        //if (magsqr > 1f)
-          //  rb.AddForce(.01f * offset.normalized / magsqr);
-        //else
-        rb.AddForce(new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)));
+        if (magsqr > 1f)
+           rb.AddForce(.01f * offset.normalized / magsqr);
+        else
+           rb.AddForce(new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)));
         if (rot == false)
         {
             rot = true;

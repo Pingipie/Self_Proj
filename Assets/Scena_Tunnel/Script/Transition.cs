@@ -7,16 +7,30 @@ using UnityEngine.SceneManagement;
 public class Transition : MonoBehaviour
 {
     public int transition;
+    private bool t1;
+    private bool t2;
+
+    private void Start()
+    {
+        t1 = false;
+        t2 = false;
+
+    }
+
+
+
 
     void Update()
     {
-        if (transition == 1)
+        if (transition == 1 && t1==false)
         {
-            transition = 0;
+            t1 = true;
+        
             StartCoroutine(FirstTransitionScene());
         }
-        else if (transition == 2)
+        else if (transition==2 && t2==false)
         {
+            t2 = true;
             transition = 0;
             StartCoroutine(SecondTransitionScene());
         }

@@ -3,7 +3,12 @@ guid: d802b2b3787da2b40a754cf1c981d974
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_-_Translucent_Matte_(Gray)
+    second: {fileID: 2100000, guid: 5d9659a2afc37734cbda4e8d4e900bd2, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
