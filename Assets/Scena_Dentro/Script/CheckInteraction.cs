@@ -13,7 +13,8 @@ public class CheckInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Hand")) { 
+        if (collider.CompareTag("Hand")) {
+            this.GetComponent<AudioSource>().Play();
             collision = true;
             Destroy(this.GetComponent<FloaterIcon>());
             Debug.Log("collisiondetected");
