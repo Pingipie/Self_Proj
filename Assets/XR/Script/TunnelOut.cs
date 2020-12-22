@@ -273,6 +273,11 @@ public class TunnelOut : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
 
+        emptyColor.GetComponent<EmptyColor>().blueInteraction = blueInteraction;
+        emptyColor.GetComponent<EmptyColor>().redInteraction = redInteraction;
+        emptyColor.GetComponent<EmptyColor>().yellowInteraction = yellowInteraction;
+        emptyColor.GetComponent<EmptyColor>().greenInteraction = greenInteraction;
+
         emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
         emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
         emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
@@ -286,10 +291,5 @@ public class TunnelOut : MonoBehaviour
             i -= .01f;
             yield return new WaitForSeconds(.1f);
         }
-
-        emptyColor.GetComponent<EmptyColor>().blueInteraction = blueInteraction;
-        emptyColor.GetComponent<EmptyColor>().redInteraction = redInteraction;
-        emptyColor.GetComponent<EmptyColor>().yellowInteraction = yellowInteraction;
-        emptyColor.GetComponent<EmptyColor>().greenInteraction = greenInteraction;
     }
 }

@@ -14,24 +14,18 @@ public class Transition : MonoBehaviour
     {
         t1 = false;
         t2 = false;
-
     }
-
-
-
 
     void Update()
     {
         if (transition == 1 && t1==false)
         {
-            t1 = true;
-        
+            t1 = true;       
             StartCoroutine(FirstTransitionScene());
         }
         else if (transition==2 && t2==false)
         {
             t2 = true;
-            transition = 0;
             StartCoroutine(SecondTransitionScene());
         }
     }
