@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class TunnelOut : MonoBehaviour
 {
     GameObject Algorithm;
-    public GameObject emptyColor;
     GameObject mirrorEmpty;
     GameObject merchEmpty;
     GameObject colliderEmpty;
     GameObject blackSphereFade;
     GameObject Light;
+    GameObject avatar;
+
+    public GameObject emptyColor;
 
     Algorithm algorithm;
 
@@ -33,6 +35,7 @@ public class TunnelOut : MonoBehaviour
 
         mirrorEmpty = GameObject.Find("Mirror");
         blackSphereFade = GameObject.Find("FadeSphereBlack");
+        avatar = GameObject.Find("Avatar_Cube");
     }
 
     // Update is called once per frame
@@ -41,7 +44,9 @@ public class TunnelOut : MonoBehaviour
         if (GameObject.Find("Algorithm") != null)
         {
             mirrorEmpty.transform.GetChild(2).gameObject.SetActive(true);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
         }
+
         else
         {
             mirrorEmpty.transform.GetChild(2).gameObject.SetActive(false);
@@ -59,6 +64,7 @@ public class TunnelOut : MonoBehaviour
                 counter = 1;
                 transition = 2;
                 StartCoroutine(Tunnel());
+                StartCoroutine(glitch());
             }
         }
 
@@ -66,6 +72,7 @@ public class TunnelOut : MonoBehaviour
         {
             emptyColor = GameObject.Find("ChangeColor");
             emptyColor.GetComponent<Transition>().transition = transition;
+            StartCoroutine(changeSkin());
         }
 
         if(GameObject.Find("Fade") != null)
@@ -104,6 +111,53 @@ public class TunnelOut : MonoBehaviour
 
     }
 
+    IEnumerator glitch()
+    {
+        yield return new WaitForSeconds(60);
+
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        yield return new WaitForSeconds(.5f);
+        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+
+    }
+
+    IEnumerator changeSkin()
+    {
+        float i = 0;
+
+        while (i < 1.001f)
+        {
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", i);
+            i += .01f;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
     IEnumerator Tunnel()
     {
         yield return new WaitForSeconds(2);
@@ -123,6 +177,8 @@ public class TunnelOut : MonoBehaviour
 
         SceneManager.LoadSceneAsync("Scena_Tunnel", LoadSceneMode.Additive);
 
+        float i = 1;
+
         algorithm = Algorithm.GetComponent<Algorithm>();
 
         totInteraction = algorithm.totInteraction;
@@ -137,6 +193,13 @@ public class TunnelOut : MonoBehaviour
             color.a -= .01f;
             blackSphereFade.GetComponent<MeshRenderer>().material.color = color;
             yield return new WaitForSeconds(.01f);
+        }
+
+        while (i > 0.001f)
+        {
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", i);
+            i -= .01f;
+            yield return new WaitForSeconds(.1f);
         }
 
         emptyColor.GetComponent<EmptyColor>().blueInteraction = blueInteraction;
