@@ -5850,12 +5850,12 @@ PrefabInstance:
     - target: {fileID: 6436038979451669376, guid: 67ac87016ba42eb4a97b158b69f40986,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.811
       objectReference: {fileID: 0}
     - target: {fileID: 6436038979451669376, guid: 67ac87016ba42eb4a97b158b69f40986,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.75
+      value: 4.659
       objectReference: {fileID: 0}
     - target: {fileID: 6436038979451669376, guid: 67ac87016ba42eb4a97b158b69f40986,
         type: 3}
@@ -6326,7 +6326,7 @@ MonoBehaviour:
   Cull: 0
   CullDistance: 0
   TextureSize: 1
-  ManualSize: 1057
+  ManualSize: 537
   UseCameraClipPlane: 0
   ClipPlaneOffset: 0
   ReflectLayers:
@@ -16744,7 +16744,7 @@ MonoBehaviour:
     locomotion:
       weight: 1
       footDistance: 0.2
-      stepThreshold: 0.4
+      stepThreshold: 0.3
       angleThreshold: 60
       comAngleMlp: 1
       maxVelocity: 0.5
@@ -17255,7 +17255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725871884}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.003000001, y: -1.783, z: 3.68}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
