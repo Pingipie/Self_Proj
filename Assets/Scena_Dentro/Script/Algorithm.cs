@@ -2158,7 +2158,7 @@ public class Algorithm : MonoBehaviour
                     if (greenIcon.GetComponent<CheckInteraction>().collision && greenIcon.GetComponent<MeshCollider>().enabled)
                     {
                         Green[8].AddComponent<OneParticlesAttraction>();
-                        Green[8].AddComponent<TwoParticlesAttraction>();
+                        Green[9].AddComponent<TwoParticlesAttraction>();
                         Green[10].AddComponent<ThreeParticlesAttraction>();
 
                         Green[8].GetComponent<OneParticlesAttraction>().AffectedParticles = greenIcon.GetComponentInChildren<ParticleSystem>();
