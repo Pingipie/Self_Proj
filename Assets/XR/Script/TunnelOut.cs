@@ -29,6 +29,8 @@ public class TunnelOut : MonoBehaviour
     int nM;
     int nC;
 
+    bool glitchB;
+    bool time;
 
     public int transition;
 
@@ -42,6 +44,9 @@ public class TunnelOut : MonoBehaviour
         blackSphereFade = GameObject.Find("FadeSphereBlack");
         avatar = GameObject.Find("Avatar_Cube");
         emptyAvatar = GameObject.Find("AVATARnfb");
+
+        glitchB = false;
+        time = false;
     }
 
     // Update is called once per frame
@@ -71,7 +76,6 @@ public class TunnelOut : MonoBehaviour
                 counter = 1;
                 transition = 2;
                 StartCoroutine(Tunnel());
-                StartCoroutine(glitch());
             }
         }
 
@@ -115,113 +119,138 @@ public class TunnelOut : MonoBehaviour
             }
         }
 
+        if(merchEmpty != null && colliderEmpty != null && glitchB == false)
+        {
+            glitchB = true;
+            StartCoroutine(glitch());
+        }
+
     }
 
     IEnumerator glitch()
     {
-        yield return new WaitForSeconds(60);
+        if (time == false) {
+            yield return new WaitForSeconds(30);
+            time = true;
+        }
 
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+        mirrorEmpty.AddComponent<RaycastTelephone>();
 
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+        if (mirrorEmpty.GetComponent<RaycastTelephone>().hit.collider.name == "Avatar_Cube" || mirrorEmpty.GetComponent<RaycastTelephone>().hit.collider.name == "sx" || mirrorEmpty.GetComponent<RaycastTelephone>().hit.collider.name == "dx")
+        {
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
-        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
-        emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+            emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+            emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
+
+            SceneManager.UnloadSceneAsync("Scena_Fuori");
+
+            mirrorEmpty.transform.GetChild(0).gameObject.SetActive(false);
+            mirrorEmpty.transform.GetChild(1).gameObject.SetActive(false);
+            mirrorEmpty.transform.GetChild(3).gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(5);
+
+            SceneManager.UnloadSceneAsync("Scena_XR");
+        }
+        else
+            glitchB = false;
     }
 
     IEnumerator changeSkin()

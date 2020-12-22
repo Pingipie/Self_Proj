@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class RaycastTelephone : MonoBehaviour
 {
+    GameObject mirror;
+
+    public RaycastHit hit;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        mirror = GameObject.Find("Mirror");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        RaycastHit hit;
 
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.yellow, 1000);
-
-            print(hit.collider.name);
-
-            if (hit.collider.name == "Avatar_Cube")
-            {
-                
-            }
         }
         else
         {
