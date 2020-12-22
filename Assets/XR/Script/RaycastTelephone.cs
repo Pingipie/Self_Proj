@@ -23,7 +23,7 @@ public class RaycastTelephone : MonoBehaviour
 
             if (hit.collider.name == "Avatar_Cube")
             {
-                print("ok hit");
+                
             }
         }
         else
