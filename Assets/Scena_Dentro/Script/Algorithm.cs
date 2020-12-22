@@ -2501,6 +2501,11 @@ public class Algorithm : MonoBehaviour
         {
             renderVideo.enabled = true;
             player.Play();
+
+            if(player.TryGetComponent(out AudioSource audio))
+            {
+                audio.Play();
+            }
         }
 
         //per immagini
