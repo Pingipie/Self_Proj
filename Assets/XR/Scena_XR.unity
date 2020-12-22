@@ -6425,7 +6425,7 @@ MonoBehaviour:
   IsMirrorInMirror: 0
   MirrorInMirrorId: 
   TurnOffOcclusion: 0
-  DeviceType: 0
+  DeviceType: 3
   WorkType: 1
   UpVector: 2
   Intensity: 0.5
@@ -6440,7 +6440,7 @@ MonoBehaviour:
   Cull: 0
   CullDistance: 0
   TextureSize: 1
-  ManualSize: 1081
+  ManualSize: 1012
   UseCameraClipPlane: 0
   ClipPlaneOffset: 0
   ReflectLayers:
@@ -18172,7 +18172,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1bc430e501d502745b2aa1add98b9e51, type: 2}
+      objectReference: {fileID: 2100000, guid: 04e9137e64cf9284194d0ec52c1adb43, type: 2}
     - target: {fileID: 919132149155446097, guid: cd2ec38eb6bb8024eaaf1995288bea85,
         type: 3}
       propertyPath: m_Name
