@@ -12,6 +12,7 @@ public class TunnelOut : MonoBehaviour
     GameObject blackSphereFade;
     GameObject Light;
     GameObject avatar;
+    GameObject emptyAvatar;
 
     public GameObject emptyColor;
 
@@ -36,6 +37,7 @@ public class TunnelOut : MonoBehaviour
         mirrorEmpty = GameObject.Find("Mirror");
         blackSphereFade = GameObject.Find("FadeSphereBlack");
         avatar = GameObject.Find("Avatar_Cube");
+        emptyAvatar = GameObject.Find("AVATARnfb");
     }
 
     // Update is called once per frame
@@ -116,33 +118,93 @@ public class TunnelOut : MonoBehaviour
         yield return new WaitForSeconds(60);
 
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(true);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 0f);
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
 
     }
 
@@ -194,6 +256,13 @@ public class TunnelOut : MonoBehaviour
             blackSphereFade.GetComponent<MeshRenderer>().material.color = color;
             yield return new WaitForSeconds(.01f);
         }
+
+        emptyAvatar.transform.GetChild(1).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(2).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(3).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(4).gameObject.SetActive(false);
+        emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
+        //emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
         while (i > 0.001f)
         {
