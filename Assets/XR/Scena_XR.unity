@@ -345,7 +345,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: aaccd2b1909fe46f183d44c1b62523b9, type: 2}
+      objectReference: {fileID: 2100000, guid: af7aa583928b9465b84c485a6594422a, type: 2}
     - target: {fileID: 919132149155446097, guid: 02e5f735a834afa4b9234b9fa7097446,
         type: 3}
       propertyPath: m_Name
@@ -6349,7 +6349,7 @@ MonoBehaviour:
   - ObjectToShade: {fileID: 2002682881}
     MaterialToChange: {fileID: 2100000, guid: aaccd2b1909fe46f183d44c1b62523b9, type: 2}
   - ObjectToShade: {fileID: 2108429710}
-    MaterialToChange: {fileID: 2100000, guid: aaccd2b1909fe46f183d44c1b62523b9, type: 2}
+    MaterialToChange: {fileID: 2100000, guid: af7aa583928b9465b84c485a6594422a, type: 2}
   EnableFinalShader: 0
   FinalShader: {fileID: 0}
   EnableARMode: 0
