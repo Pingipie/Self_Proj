@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SolidObjGraphPBR
+  m_Name: materiale_cover
   m_Shader: {fileID: -6465566751694194690, guid: 6f6b0a96b94c0ca4889c445f70c9099b,
     type: 3}
   m_ShaderKeywords: 
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_5EFEBA08:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: de82aa90062c8b34f822d322f18f3d9c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B499EB3D:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ec6a162f412830e46bf4016c87e8d27b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B98F2266:
@@ -33,11 +33,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_C93B8274:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3920e09d0fa19f848a5b41356df9248d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 61257135c65b9b3499ad7756edfeb7e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Loghi:

@@ -507,7 +507,7 @@ public class Algorithm : MonoBehaviour
                         StartCoroutine(appear(Red[5]));
                         StartCoroutine(appear(Red[6]));
 
-                        StartCoroutine(disappear(Yellow[0]));
+                        StartCoroutine(destroy(Yellow[0]));
                         yellowInteraction = -1;
 
                         totInteraction++;
