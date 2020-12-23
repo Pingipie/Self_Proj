@@ -102,7 +102,7 @@ public class TunnelOut : MonoBehaviour
         {
             merchEmpty = GameObject.Find("Merchandising");
             emptyPhone = GameObject.Find("Phone");
-            emptyPhone.transform.GetChild(0).gameObject.GetComponent<CollisionDetector>().enabled = false;
+            Destroy(emptyPhone.transform.GetChild(0).gameObject.GetComponent<CollisionDetector>());
 
 
             nM = merchEmpty.transform.childCount;
@@ -138,11 +138,12 @@ public class TunnelOut : MonoBehaviour
             time = true;
         }
 
-        mirrorEmpty.AddComponent<RaycastTelephone>();
-        if (mirrorEmpty.GetComponent<RaycastTelephone>().ray == true)
+        mirrorEmpty.transform.GetChild(0).gameObject.AddComponent<RaycastTelephone>();
+
+        if (mirrorEmpty.transform.GetChild(0).gameObject.GetComponent<RaycastTelephone>().ray == true)
         {
 
-            if (mirrorEmpty.GetComponent<RaycastTelephone>().hit.collider.name == "carlo")
+            if (mirrorEmpty.transform.GetChild(0).gameObject.GetComponent<RaycastTelephone>().hit.collider.name == "carlo")
             {
                 avatar.GetComponent<Renderer>().material.SetFloat("Vector1_1FB37F84", 1f);
                 emptyAvatar.transform.GetChild(1).gameObject.SetActive(true);
@@ -245,14 +246,13 @@ public class TunnelOut : MonoBehaviour
                 emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
                 emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-                SceneManager.UnloadSceneAsync("Scena_Fuori");
-
                 mirrorEmpty.transform.GetChild(0).gameObject.SetActive(false);
                 mirrorEmpty.transform.GetChild(1).gameObject.SetActive(false);
                 mirrorEmpty.transform.GetChild(3).gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(5);
 
+                SceneManager.UnloadSceneAsync("Scena_Fuori");
                 SceneManager.UnloadSceneAsync("Scena_XR");
             }
             else

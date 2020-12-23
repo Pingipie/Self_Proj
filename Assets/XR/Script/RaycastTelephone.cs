@@ -19,5 +19,7 @@ public class RaycastTelephone : MonoBehaviour
     void FixedUpdate()
     {
         ray = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity);
+        print(ray);
+        print(hit.collider.name);
     }
 }
