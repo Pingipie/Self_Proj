@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5766,6 +5766,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.41906208
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a2e81be30e456a1418c601a0f56dffea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39c073154e589424294a1587d8beaf03, type: 2}
     - target: {fileID: 919132149155446097, guid: a2e81be30e456a1418c601a0f56dffea,
         type: 3}
       propertyPath: m_Name
@@ -6488,7 +6493,7 @@ MonoBehaviour:
   Cull: 0
   CullDistance: 0
   TextureSize: 1
-  ManualSize: 1041
+  ManualSize: 1068
   UseCameraClipPlane: 0
   ClipPlaneOffset: 0
   ReflectLayers:
@@ -6765,6 +6770,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.22297263
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b6ec65dbd2c32b346b5c5989d30cf657,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f7b2f5539e13a2a46821fbfe2b555bc0, type: 2}
     - target: {fileID: 919132149155446097, guid: b6ec65dbd2c32b346b5c5989d30cf657,
         type: 3}
       propertyPath: m_Name
@@ -17448,6 +17458,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.22297263
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b6ec65dbd2c32b346b5c5989d30cf657,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f7b2f5539e13a2a46821fbfe2b555bc0, type: 2}
     - target: {fileID: 919132149155446097, guid: b6ec65dbd2c32b346b5c5989d30cf657,
         type: 3}
       propertyPath: m_Name
@@ -17685,6 +17700,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.41906208
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a2e81be30e456a1418c601a0f56dffea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39c073154e589424294a1587d8beaf03, type: 2}
     - target: {fileID: 919132149155446097, guid: a2e81be30e456a1418c601a0f56dffea,
         type: 3}
       propertyPath: m_Name
@@ -18108,6 +18128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9cbfe31de6be746bada21fd4b8574a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ray: 0
 --- !u!64 &1570276855
 MeshCollider:
   m_ObjectHideFlags: 0
