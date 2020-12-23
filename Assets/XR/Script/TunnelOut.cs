@@ -32,6 +32,7 @@ public class TunnelOut : MonoBehaviour
 
     bool glitchB;
     bool time;
+    bool mirrorEx;
 
     public int transition;
 
@@ -48,6 +49,7 @@ public class TunnelOut : MonoBehaviour
 
         glitchB = false;
         time = false;
+        mirrorEx = false;
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class TunnelOut : MonoBehaviour
             StartCoroutine(changeSkin());
         }
 
-        if(GameObject.Find("Fade") != null)
+        if(GameObject.Find("Fade") != null && mirrorEx == false)
         {
             mirrorEmpty.transform.GetChild(0).gameObject.SetActive(true);
             mirrorEmpty.transform.GetChild(1).gameObject.SetActive(true);
@@ -246,11 +248,10 @@ public class TunnelOut : MonoBehaviour
                 emptyAvatar.transform.GetChild(5).gameObject.SetActive(false);
                 emptyAvatar.transform.GetChild(6).gameObject.SetActive(false);
 
-                mirrorEmpty.transform.GetChild(0).gameObject.SetActive(false);
-                mirrorEmpty.transform.GetChild(1).gameObject.SetActive(false);
+                mirrorEx = true;
                 mirrorEmpty.transform.GetChild(3).gameObject.SetActive(true);
 
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(10);
 
                 SceneManager.UnloadSceneAsync("Scena_Fuori");
                 SceneManager.UnloadSceneAsync("Scena_XR");
