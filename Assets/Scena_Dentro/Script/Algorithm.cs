@@ -26,6 +26,8 @@ public class Algorithm : MonoBehaviour
     private int crr; //per la concorrenza
     private int exit;
 
+    private bool stop;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,8 @@ public class Algorithm : MonoBehaviour
         chronology = new string[6];
 
         crr = 1;
+
+        stop = false;
     }
 
     // Update is called once per frame
@@ -75,7 +79,7 @@ public class Algorithm : MonoBehaviour
         exit = 0;
 
         //prima interazione
-        if (totInteraction == 0)
+        if (totInteraction == 0 && stop == false)
         {
             //Debug.Log(Blue[1].name);
             if (Blue[0].GetComponent<CheckInteraction>().collision)
@@ -175,12 +179,16 @@ public class Algorithm : MonoBehaviour
                 yellowInteraction = -1;
             }
 
-
+            if (stop == false && totInteraction == 1)
+            {
+                stop = true;
+                StartCoroutine(StopAndGo());
+            }
 
         } //fine prima interazione
 
         //inizio seconda interazione
-        else if (totInteraction == 1)
+        else if (totInteraction == 1 && stop == false)
         {
             foreach (GameObject blueIcon in Blue)
             {
@@ -404,10 +412,17 @@ public class Algorithm : MonoBehaviour
 
                 chronology[1] = "green";
             }
+
+            if (stop == false && totInteraction == 2)
+            {
+                stop = true;
+                StartCoroutine(StopAndGo());
+            }
+
         } //fine seconda interazione
 
         //inizio terza interazione
-        else if (totInteraction == 2)
+        else if (totInteraction == 2 && stop == false)
         {
             if (blueInteraction == 2)
             {
@@ -728,10 +743,16 @@ public class Algorithm : MonoBehaviour
                     chronology[2] = "green";
                 }
             }
+
+            if (stop == false && totInteraction == 3)
+            {
+                stop = true;
+                StartCoroutine(StopAndGo());
+            }
         }//fine terza interazione
 
         //inizio quarta interazione
-        else if (totInteraction == 3)
+        else if (totInteraction == 3 && stop == false)
         {
             if (blueInteraction == 3)
             {
@@ -1601,10 +1622,17 @@ public class Algorithm : MonoBehaviour
                     chronology[3] = "green";
                 }
             }
+
+            if (stop == false && totInteraction == 4)
+            {
+                stop = true;
+                StartCoroutine(StopAndGo());
+            }
+
         }//fine quarta interazione
 
         //inizio quinta interazione
-        else if (totInteraction == 4)
+        else if (totInteraction == 4 && stop == false)
         {
             if (blueInteraction == 4)
             {
@@ -2281,6 +2309,13 @@ public class Algorithm : MonoBehaviour
                     }
                 }
             }
+
+            if (stop == false && totInteraction == 5)
+            {
+                stop = true;
+                StartCoroutine(StopAndGo());
+            }
+
         }//fine quinta interazione
 
         crr = 1;
@@ -2356,7 +2391,7 @@ public class Algorithm : MonoBehaviour
             ParticleSystem.Particle[] particles = new ParticleSystem.Particle[icon.GetComponentInChildren<ParticleSystem>().particleCount];
             icon.GetComponentInChildren<ParticleSystem>().Stop();
             icon.GetComponentInChildren<ParticleSystem>().SetParticles(particles, 0);
-            icon.GetComponent<FloaterIcon>().enabled = true;
+            //icon.GetComponent<FloaterIcon>().enabled = true;
         }
         else if (icon.TryGetComponent(out OddParticlesAttraction odd))
         {
@@ -2371,6 +2406,7 @@ public class Algorithm : MonoBehaviour
 
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
+            icon.GetComponent<FloaterIcon>().enabled = false;
 
             float i = 1.5f;
             while (i > 0f)
@@ -2399,6 +2435,7 @@ public class Algorithm : MonoBehaviour
 
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
+            icon.GetComponent<FloaterIcon>().enabled = false;
 
             float i = 1.5f;
             while (i > 0f)
@@ -2427,6 +2464,7 @@ public class Algorithm : MonoBehaviour
 
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
+            icon.GetComponent<FloaterIcon>().enabled = false;
 
             float i = 1.5f;
             while (i > 0f)
@@ -2455,6 +2493,7 @@ public class Algorithm : MonoBehaviour
 
             //va inserita l'animazione dell'apparizione, si potrebbe usare un bool associato all'animazione poi per far partire
             //l'apparizione di Collider e Render
+            icon.GetComponent<FloaterIcon>().enabled = false;
 
             float i = 1.5f;
             while (i > 0f)
@@ -2516,5 +2555,62 @@ public class Algorithm : MonoBehaviour
         else if(media.TryGetComponent(out AudioSource audioSource))
             audioSource.Play();
        
+    }
+
+    IEnumerator StopAndGo()
+    {
+        foreach (GameObject blueIcon in Blue)
+        {
+            if (blueIcon.TryGetComponent(out FloaterIcon move))
+                move.enabled = false;
+        }
+
+        foreach (GameObject redIcon in Red)
+        {
+            if(redIcon.TryGetComponent(out FloaterIcon move))
+                move.enabled = false;
+        }
+
+        foreach (GameObject yellowIcon in Yellow)
+        {
+            if(yellowIcon.TryGetComponent(out FloaterIcon move))
+                move.enabled = false;
+        }
+
+        foreach (GameObject greenIcon in Green)
+        {
+            if(greenIcon.TryGetComponent(out FloaterIcon move))
+                move.enabled = false;
+        }
+
+        yield return new WaitForSeconds(30);
+
+        if (totInteraction != 5)
+        {
+            foreach (GameObject blueIcon in Blue)
+            {
+                if (blueIcon.TryGetComponent(out FloaterIcon move))
+                    move.enabled = true;
+            }
+
+            foreach (GameObject redIcon in Red)
+            {
+                if (redIcon.TryGetComponent(out FloaterIcon move))
+                    move.enabled = true;
+            }
+
+            foreach (GameObject yellowIcon in Yellow)
+            {
+                if (yellowIcon.TryGetComponent(out FloaterIcon move))
+                    move.enabled = true;
+            }
+
+            foreach (GameObject greenIcon in Green)
+            {
+                if (greenIcon.TryGetComponent(out FloaterIcon move))
+                    move.enabled = true;
+            }
+        }
+        stop = false;
     }
 }

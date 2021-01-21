@@ -277,7 +277,7 @@ public class TunnelOut : MonoBehaviour
 
     IEnumerator Tunnel()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(60);
 
         while (blackSphereFade.GetComponent<MeshRenderer>().material.color.a < 1)
         {
