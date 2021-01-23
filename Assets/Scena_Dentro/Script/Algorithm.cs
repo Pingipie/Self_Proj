@@ -2563,27 +2563,35 @@ public class Algorithm : MonoBehaviour
         {
             if (blueIcon.TryGetComponent(out FloaterIcon move))
                 move.enabled = false;
+            if (blueIcon.TryGetComponent(out CheckInteraction check))
+                Destroy(check);
         }
 
         foreach (GameObject redIcon in Red)
         {
-            if(redIcon.TryGetComponent(out FloaterIcon move))
+            if (redIcon.TryGetComponent(out FloaterIcon move))
                 move.enabled = false;
+            if (redIcon.TryGetComponent(out CheckInteraction check))
+                Destroy(check);
         }
 
         foreach (GameObject yellowIcon in Yellow)
         {
-            if(yellowIcon.TryGetComponent(out FloaterIcon move))
+            if (yellowIcon.TryGetComponent(out FloaterIcon move))
                 move.enabled = false;
+            if (yellowIcon.TryGetComponent(out CheckInteraction check))
+                Destroy(check);
         }
 
         foreach (GameObject greenIcon in Green)
         {
-            if(greenIcon.TryGetComponent(out FloaterIcon move))
+            if (greenIcon.TryGetComponent(out FloaterIcon move))
                 move.enabled = false;
+            if (greenIcon.TryGetComponent(out CheckInteraction check))
+                Destroy(check);
         }
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(30);
 
         if (totInteraction != 5)
         {
@@ -2591,24 +2599,32 @@ public class Algorithm : MonoBehaviour
             {
                 if (blueIcon.TryGetComponent(out FloaterIcon move))
                     move.enabled = true;
+                if (!blueIcon.TryGetComponent(out CheckInteraction check))
+                    blueIcon.AddComponent<CheckInteraction>();
             }
 
             foreach (GameObject redIcon in Red)
             {
                 if (redIcon.TryGetComponent(out FloaterIcon move))
                     move.enabled = true;
+                if (!redIcon.TryGetComponent(out CheckInteraction check))
+                    redIcon.AddComponent<CheckInteraction>();
             }
 
             foreach (GameObject yellowIcon in Yellow)
             {
                 if (yellowIcon.TryGetComponent(out FloaterIcon move))
                     move.enabled = true;
+                if (!yellowIcon.TryGetComponent(out CheckInteraction check))
+                    yellowIcon.AddComponent<CheckInteraction>();
             }
 
             foreach (GameObject greenIcon in Green)
             {
                 if (greenIcon.TryGetComponent(out FloaterIcon move))
                     move.enabled = true;
+                if (!greenIcon.TryGetComponent(out CheckInteraction check))
+                    greenIcon.AddComponent<CheckInteraction>();
             }
         }
         stop = false;

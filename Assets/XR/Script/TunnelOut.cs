@@ -14,6 +14,7 @@ public class TunnelOut : MonoBehaviour
     GameObject avatar;
     GameObject emptyAvatar;
     GameObject emptyPhone;
+    GameObject vrRig;
 
     public GameObject emptyColor;
 
@@ -46,6 +47,7 @@ public class TunnelOut : MonoBehaviour
         blackSphereFade = GameObject.Find("FadeSphereBlack");
         avatar = GameObject.Find("Avatar_Cube");
         emptyAvatar = GameObject.Find("AVATARnfb");
+        vrRig = GameObject.Find("VR Rig");
 
         glitchB = false;
         time = false;
@@ -68,7 +70,10 @@ public class TunnelOut : MonoBehaviour
         }
 
         if (GameObject.Find("Algorithm") != null && Algorithm == null)
+        {
             Algorithm = GameObject.Find("Algorithm");
+            vrRig.transform.position = new Vector3(vrRig.transform.position.x, vrRig.transform.position.y, 3.36f);     
+        }
 
 
         if (GameObject.Find("Algorithm") != null)
