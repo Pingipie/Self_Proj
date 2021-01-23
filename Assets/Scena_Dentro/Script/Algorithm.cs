@@ -2583,7 +2583,7 @@ public class Algorithm : MonoBehaviour
                 move.enabled = false;
         }
 
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(10);
 
         if (totInteraction != 5)
         {
